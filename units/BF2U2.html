@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Unit 2 · My Senses · 我的感官<\/title>
+<title>Unit 2 · My Senses · 我的感官</title>
 <style>﻿/* Big Fun 合订课堂游戏 · 大屏版 */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -183,13 +183,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;background:#111827;color:#fff;padding:12px 22px;border-radius:999px;font-size:18px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.3);animation:tp .2s}
 @keyframes tp{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(max-width:640px){.opt-grid{grid-template-columns:repeat(2,1fr)}.gcell{min-height:120px}.gcell .ic{font-size:52px!important}.mcard .ic{font-size:46px!important}.ttl{font-size:18px!important}}
-<\/style>
-<\/head>
+</style>
+</head>
 <body style="--ac:#f43f5e;background:#eef1f6">
-<div class="topbar"><a class="tbtn" href="../index.html" title="返回单元目录" style="text-decoration:none">📚<small>目录</small></a><button class="tbtn" id="btnHome" title="返回游戏列表">🏠<small>游戏列表<\/small><\/button><div class="ttl"><span>👀 Unit 2 · My Senses<\/span><span class="sub">　Big Fun 2 · U2 · 我的感官<\/span><\/div><button class="tbtn" id="btnVoice" title="朗读开关">🔊<small>朗读<\/small><\/button><button class="tbtn" id="btnText" title="字幕开关">👁️<small>字幕<\/small><\/button><\/div>
-<div id="screen"><\/div>
+<div class="topbar"><a class="tbtn" href="../index.html" title="返回单元目录" style="text-decoration:none">📚<small>目录</small></a><button class="tbtn" id="btnHome" title="返回游戏列表">🏠<small>游戏列表</small></button><div class="ttl"><span>👀 Unit 2 · My Senses</span><span class="sub">　Big Fun 2 · U2 · 我的感官</span></div><button class="tbtn" id="btnVoice" title="朗读开关">🔊<small>朗读</small></button><button class="tbtn" id="btnText" title="字幕开关">👁️<small>字幕</small></button></div>
+<div id="screen"></div>
 <script>window.UNIT = {"key": "BF2U2", "book": "Big Fun 2", "num": "U2", "name": "Unit 2 · My Senses", "cn": "我的感官", "emoji": "👀", "accent": "#f43f5e", "file": "BF2_U2_My_Senses.html", "sc": {"theme": "sc-face", "face": true, "tip": "听一听，把五官贴到脸上正确的位置", "items": [], "title": "", "deco": []}, "words": [{"en": "eyes", "zh": "眼睛", "icon": "👀", "q": "What do you see with?", "say": "What do you see with? I see with my eyes."}, {"en": "ears", "zh": "耳朵", "icon": "👂", "q": "What do you hear with?", "say": "What do you hear with? I hear with my ears."}, {"en": "nose", "zh": "鼻子", "icon": "👃", "q": "What do you smell with?", "say": "What do you smell with? I smell with my nose."}, {"en": "mouth", "zh": "嘴巴", "icon": "👄", "q": "What do you eat with?", "say": "What do you eat with? I eat with my mouth."}, {"en": "hands", "zh": "手", "icon": "✋", "q": "What do you touch with?", "say": "What do you touch with? I touch with my hands."}, {"en": "tongue", "zh": "舌头", "icon": "👅", "q": "What do you taste with?", "say": "What do you taste with? I taste with my tongue."}]};
-<\/script>
+</script>
 <script>/* Big Fun 合订课堂小游戏 · 引擎 */
 "use strict";
 var UNIT = window.UNIT;
@@ -202,13 +202,13 @@ var PREFS_KEY = 'bigfun_v2_prefs';
 var prefs = { voice:true, text:true };
 try{ var _p = JSON.parse(localStorage.getItem(PREFS_KEY)||'null'); if(_p){ prefs.voice = _p.voice!==false; prefs.text = _p.text!==false; } }catch(e){}
 function savePrefs(){ try{ localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); }catch(e){} }
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/<\/g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function shuffle(a){ var b=a.slice(); for(var i=b.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=b[i];b[i]=b[j];b[j]=t; } return b; }
 function pickN(list,n){ return shuffle(list).slice(0,n); }
 function byId(id){ return document.getElementById(id); }
 /* 图片 HTML */
-function pic(w, fs){ if(w.svg){ return '<span class="sv">'+w.svg+'<\/span>'; } return '<span class="ic" style="font-size:'+(fs||58)+'px">'+esc(w.icon)+'<\/span>'; }
-function lbl(w){ return prefs.text ? '<span class="en">'+esc(w.en)+'<\/span><span class="zh">'+esc(w.zh)+'<\/span>' : ''; }
+function pic(w, fs){ if(w.svg){ return '<span class="sv">'+w.svg+'</span>'; } return '<span class="ic" style="font-size:'+(fs||58)+'px">'+esc(w.icon)+'</span>'; }
+function lbl(w){ return prefs.text ? '<span class="en">'+esc(w.en)+'</span><span class="zh">'+esc(w.zh)+'</span>' : ''; }
 /* 语音 */
 var _speechOk=false;
 function pickVoice(){ try{ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);}); if(!vs.length) return null; return vs.find(function(v){return /en-US/i.test(v.lang)&&/(google|aria|zira|jenny|samantha|natural|siri)/i.test(v.name);})||vs[0]; }catch(e){ return null; } }
@@ -230,7 +230,7 @@ function clearTimers(){ timers.forEach(function(t){ clearTimeout(t); }); timers=
 function toast(msg){ var t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); },1600); }
 function burst(x,y){ var f=document.createElement('div'); f.className='fx'; var es=['⭐','✨','🎉','🌟','💛']; for(var k=0;k<14;k++){ var s=document.createElement('span'); s.style.left=((x!==undefined?x:30)+Math.random()*40)+'%'; s.style.top=(y!==undefined?y:20)+'%'; s.textContent=es[k%es.length]; f.appendChild(s); } document.body.appendChild(f); setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); },1100); }
 function paint(html){ screenEl.innerHTML=html; window.scrollTo(0,0); }
-function gameShell(title, html){ paint('<div class="ghead"><span class="ht">'+esc(title)+'<\/span><\/div>'+html); }
+function gameShell(title, html){ paint('<div class="ghead"><span class="ht">'+esc(title)+'</span></div>'+html); }
 var curGame = null;
 function stopGame(){ clearTimers(); stopSpeak(); removeGhost(); PUZ=null; }
 /* 首页 */
@@ -245,22 +245,22 @@ var GAME_LIST=[
 function showHome(){
   stopGame(); curGame=null;
   var gs=GAME_LIST.map(function(g){
-    return '<button class="game-card" data-id="'+g.id+'" style="--gc:'+AC+'"><span class="gi">'+g.icon+'<\/span><span class="gn">'+g.name+'<\/span><span class="gd">'+g.desc+'<\/span><\/button>';
+    return '<button class="game-card" data-id="'+g.id+'" style="--gc:'+AC+'"><span class="gi">'+g.icon+'</span><span class="gn">'+g.name+'</span><span class="gd">'+g.desc+'</span></button>';
   }).join('');
-  var ws=WORDS.map(function(w){ return '<span class="wchip">'+pic(w,46)+lbl(w)+'<\/span>'; }).join('');
+  var ws=WORDS.map(function(w){ return '<span class="wchip">'+pic(w,46)+lbl(w)+'</span>'; }).join('');
   paint(
-    '<div class="home-top"><div class="big">'+UNIT.emoji+'<\/div><div style="flex:1;min-width:220px"><h2>'+esc(UNIT.name)+'<\/h2><p>'+esc(UNIT.cn)+' · 全班一起玩，先点下面任一个小游戏<\/p><\/div><\/div>'
-    +'<div class="game-grid">'+gs+'<\/div>'
-    +'<div class="panel" style="margin-top:16px"><div class="ht" style="font-size:20px">📖 本单元单词<\/div><div class="word-grid">'+ws+'<\/div><\/div>');
+    '<div class="home-top"><div class="big">'+UNIT.emoji+'</div><div style="flex:1;min-width:220px"><h2>'+esc(UNIT.name)+'</h2><p>'+esc(UNIT.cn)+' · 全班一起玩，先点下面任一个小游戏</p></div></div>'
+    +'<div class="game-grid">'+gs+'</div>'
+    +'<div class="panel" style="margin-top:16px"><div class="ht" style="font-size:20px">📖 本单元单词</div><div class="word-grid">'+ws+'</div></div>');
   $$('.game-card').forEach(function(b){ b.onclick=function(){ startGame(b.dataset.id); }; });
 }
 function startGame(id){
   var g=GAME_LIST.find(function(x){return x.id===id;}); if(!g) return;
   curGame=id;
   var intro=document.createElement('div');
-  paint('<div class="panel ac" style="padding:36px 22px"><div style="font-size:88px">'+g.icon+'<\/div><h2 style="font-size:32px;margin:10px 0">'+esc(g.name)+'<\/h2><p style="color:#6b7280;font-size:18px;margin:6px 0 4px">'+esc(g.desc)+'<\/p>'
-    +'<div style="color:#9ca3af;font-size:14px;margin-bottom:18px">👂 可以随时点左上角 🏠 返回游戏列表<\/div>'
-    +'<div class="row center"><button class="btn big" id="goStart">▶ 开始游戏<\/button><\/div><\/div>');
+  paint('<div class="panel ac" style="padding:36px 22px"><div style="font-size:88px">'+g.icon+'</div><h2 style="font-size:32px;margin:10px 0">'+esc(g.name)+'</h2><p style="color:#6b7280;font-size:18px;margin:6px 0 4px">'+esc(g.desc)+'</p>'
+    +'<div style="color:#9ca3af;font-size:14px;margin-bottom:18px">👂 可以随时点左上角 🏠 返回游戏列表</div>'
+    +'<div class="row center"><button class="btn big" id="goStart">▶ 开始游戏</button></div></div>');
   byId('goStart').onclick=function(){
     if(id==='lp'){ sListen(); }
     else if(id==='miss'){ sMissing(); }
@@ -273,10 +273,10 @@ function startGame(id){
 function endGame(title){
   stopGame();
   burst();
-  gameShell('<span class="ht">🎉<\/span>',
-    '<div class="panel end"><div class="em">🎉<\/div><h2>'+esc(title)+' 完成啦！<\/h2>'
-    +'<p class="subnote" style="font-size:18px">大家合作得真棒！点左上角 🏠 可以随时换游戏<\/p>'
-    +'<div class="endbtns"><button class="btn" id="againBtn">🔁 再玩一次<\/button><button class="btn ghost" id="homeBtn">🏠 换一个游戏<\/button><\/div><\/div>');
+  gameShell('<span class="ht">🎉</span>',
+    '<div class="panel end"><div class="em">🎉</div><h2>'+esc(title)+' 完成啦！</h2>'
+    +'<p class="subnote" style="font-size:18px">大家合作得真棒！点左上角 🏠 可以随时换游戏</p>'
+    +'<div class="endbtns"><button class="btn" id="againBtn">🔁 再玩一次</button><button class="btn ghost" id="homeBtn">🏠 换一个游戏</button></div></div>');
   var id=curGame;
   byId('againBtn').onclick=function(){ startGame(id); };
   byId('homeBtn').onclick=showHome;
@@ -302,13 +302,13 @@ function tapGame(cfg){
   }
   function render(){
     var t=st.target;
-    var qline = (t.q) ? '<div class="qline">'+esc(t.q)+'<\/div>' : '';
+    var qline = (t.q) ? '<div class="qline">'+esc(t.q)+'</div>' : '';
     gameShell(cfg.name,
-      '<div class="panel ask"><div class="ghead"><span class="ht">'+cfg.ico+' '+cfg.name+'<\/span><span class="qbar qb2">第 '+st.n+' / '+cfg.total+' 题<\/span><\/div>'
+      '<div class="panel ask"><div class="ghead"><span class="ht">'+cfg.ico+' '+cfg.name+'</span><span class="qbar qb2">第 '+st.n+' / '+cfg.total+' 题</span></div>'
       +qline
-      +'<div class="ask-t">'+cfg.tip+'<\/div>'
-      +'<div class="ac" style="margin:12px 0"><button class="speak big" id="reSpeak">🔊<small>点我听<\/small><\/button><\/div>'
-      +'<div class="opt-grid">'+st.opts.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'<\/span>'+lbl(w)+'<\/button>'; }).join('')+'<\/div><\/div>');
+      +'<div class="ask-t">'+cfg.tip+'</div>'
+      +'<div class="ac" style="margin:12px 0"><button class="speak big" id="reSpeak">🔊<small>点我听</small></button></div>'
+      +'<div class="opt-grid">'+st.opts.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'</span>'+lbl(w)+'</button>'; }).join('')+'</div></div>');
     byId('reSpeak').onclick=function(){ speak(wSay(t)); };
     $$('.gcell').forEach(function(c){
       c.onclick=function(){
@@ -349,9 +349,9 @@ function sMissing(){
   function mem(){
     st.phase='mem';
     gameShell('谁不见了',
-      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
-      +'<div class="ask-t">👀 快看快记，记住这 4 张图片！<\/div>'
-      +'<div class="mem4" style="margin-top:14px">'+st.set.map(function(w,i){ return '<div class="mcard" data-m="'+i+'">'+pic(w,62)+lbl(w)+'<\/div>'; }).join('')+'<\/div><\/div>');
+      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了</span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮</span></div>'
+      +'<div class="ask-t">👀 快看快记，记住这 4 张图片！</div>'
+      +'<div class="mem4" style="margin-top:14px">'+st.set.map(function(w,i){ return '<div class="mcard" data-m="'+i+'">'+pic(w,62)+lbl(w)+'</div>'; }).join('')+'</div></div>');
     T(function(){ flyAway(); },2600);
   }
   function flyAway(){
@@ -364,13 +364,13 @@ function sMissing(){
     st.phase='ask';
     var cells=[0,1,2,3];
     gameShell('谁不见了',
-      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
-      +'<div class="ask-t">🤔 哪一个溜走不见了？点一点它<\/div>'
+      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了</span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮</span></div>'
+      +'<div class="ask-t">🤔 哪一个溜走不见了？点一点它</div>'
       +'<div class="mem4" style="margin-top:14px">'+cells.map(function(i){
-         if(i===st.goneIdx){ return '<div class="mcard gone"><span class="empty-q">❓<\/span><\/div>'; }
-         return '<div class="mcard">'+pic(st.set[i],62)+lbl(st.set[i])+'<\/div>';
-        }).join('')+'<\/div>'
-      +'<div class="pieces" style="margin-top:16px">'+shuffle(st.set).map(function(w,i){ return '<button class="piece" data-i="'+i+'" data-en="'+esc(w.en)+'">'+pic(w,54)+'<\/button>'; }).join('')+'<\/div><\/div>');
+         if(i===st.goneIdx){ return '<div class="mcard gone"><span class="empty-q">❓</span></div>'; }
+         return '<div class="mcard">'+pic(st.set[i],62)+lbl(st.set[i])+'</div>';
+        }).join('')+'</div>'
+      +'<div class="pieces" style="margin-top:16px">'+shuffle(st.set).map(function(w,i){ return '<button class="piece" data-i="'+i+'" data-en="'+esc(w.en)+'">'+pic(w,54)+'</button>'; }).join('')+'</div></div>');
     $$('.pieces .piece').forEach(function(p){
       p.onclick=function(){
         if(st.phase!=='ask') return;
@@ -394,9 +394,9 @@ function sOdd(){
     var items=shuffle([a,a,a,b]);
     st.ans=items.findIndex(function(x){ return x.en===b.en; });
     gameShell('找不同',
-      '<div class="panel ask"><div class="ghead"><span class="ht">🔍 找不同<\/span><span class="qbar qb2">第 '+st.n+' / 6 题<\/span><\/div>'
-      +'<div class="ask-t">三张一样的图里混进了不同的一个，点出它！<\/div>'
-      +'<div class="opt-grid" style="margin-top:14px">'+items.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'<\/span>'+lbl(w)+'<\/button>'; }).join('')+'<\/div><\/div>');
+      '<div class="panel ask"><div class="ghead"><span class="ht">🔍 找不同</span><span class="qbar qb2">第 '+st.n+' / 6 题</span></div>'
+      +'<div class="ask-t">三张一样的图里混进了不同的一个，点出它！</div>'
+      +'<div class="opt-grid" style="margin-top:14px">'+items.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'</span>'+lbl(w)+'</button>'; }).join('')+'</div></div>');
     $$('.gcell').forEach(function(c){
       c.onclick=function(){
         if(st.lock) return;
@@ -417,13 +417,13 @@ function sFlip(){
     var open1=null; var lock=false;
     function render(){
       gameShell('翻翻乐',
-        '<div class="panel ask"><div class="ghead"><span class="ht">🎴 翻翻乐<\/span><span class="qbar qb2">第 '+st.round+' / '+st.total+' 局<\/span><\/div>'
-        +'<div class="ask-t">📋 翻开两张一样的图片就配对成功<\/div>'
+        '<div class="panel ask"><div class="ghead"><span class="ht">🎴 翻翻乐</span><span class="qbar qb2">第 '+st.round+' / '+st.total+' 局</span></div>'
+        +'<div class="ask-t">📋 翻开两张一样的图片就配对成功</div>'
         +'<div class="fl-grid" style="margin-top:14px">'+state.map(function(c,i){
            var cls=c.open?'open':''; if(c.done) cls+=' done open';
-           return '<div class="flcard '+cls+'" data-i="'+i+'"><div class="in"><div class="face back">❓<\/div><div class="face front">'+pic(c.w,52)+'<span class="en">'+esc(c.w.en)+'<\/span><\/div><\/div><\/div>';
-         }).join('')+'<\/div>'
-        +'<div class="subnote" style="margin-top:12px">配对次数：'+st.moves+' 次<\/div><\/div>');
+           return '<div class="flcard '+cls+'" data-i="'+i+'"><div class="in"><div class="face back">❓</div><div class="face front">'+pic(c.w,52)+'<span class="en">'+esc(c.w.en)+'</span></div></div></div>';
+         }).join('')+'</div>'
+        +'<div class="subnote" style="margin-top:12px">配对次数：'+st.moves+' 次</div></div>');
       $$('.flcard').forEach(function(card){
         card.onclick=function(){
           if(lock) return;
@@ -454,7 +454,7 @@ function sFlip(){
     function finishBoard(){
       if(st.round>=st.total){ endGame('翻翻乐'); return; }
       st.round++;
-      paint('<div class="panel ac" style="padding:40px"><div style="font-size:80px">🎉<\/div><h2 style="font-size:30px">这一局配对成功！<\/h2><div class="row center" style="margin-top:18px"><button class="btn big" id="nb">▶ 下一局<\/button><\/div><\/div>');
+      paint('<div class="panel ac" style="padding:40px"><div style="font-size:80px">🎉</div><h2 style="font-size:30px">这一局配对成功！</h2><div class="row center" style="margin-top:18px"><button class="btn big" id="nb">▶ 下一局</button></div></div>');
       byId('nb').onclick=board;
     }
     render();
@@ -473,11 +473,11 @@ function sWhack(){
     var holes=shuffle([target].concat(rest));
     var up=[]; holes.forEach(function(h,i){ if(i<holes.length) up.push(i); });
     gameShell('听音打地鼠',
-      '<div class="panel ask"><div class="ghead"><span class="ht">🔨 听音打地鼠<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
-      +'<div class="ask-t">🔊 仔细听，然后敲中那一只！<\/div>'
-      +'<div class="ac" style="margin:10px 0"><button class="speak" id="reWh">🔊 再听一次<\/button><\/div>'
-      +'<div class="holes">'+holes.map(function(h,i){ return '<div class="hole" data-i="'+i+'"><div class="mole" data-i="'+i+'">'+pic(h,54)+'<\/div><\/div>'; }).join('')+'<\/div>'
-      +'<div class="scoreline" style="margin-top:12px">✅ 已敲对 '+st.ok+' 次<\/div><\/div>');
+      '<div class="panel ask"><div class="ghead"><span class="ht">🔨 听音打地鼠</span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮</span></div>'
+      +'<div class="ask-t">🔊 仔细听，然后敲中那一只！</div>'
+      +'<div class="ac" style="margin:10px 0"><button class="speak" id="reWh">🔊 再听一次</button></div>'
+      +'<div class="holes">'+holes.map(function(h,i){ return '<div class="hole" data-i="'+i+'"><div class="mole" data-i="'+i+'">'+pic(h,54)+'</div></div>'; }).join('')+'</div>'
+      +'<div class="scoreline" style="margin-top:12px">✅ 已敲对 '+st.ok+' 次</div></div>');
     byId('reWh').onclick=function(){ speak(wSay(target)); };
     var ended=false;
     function finish(win){
@@ -538,7 +538,7 @@ function sPuzzle(){
           var fillWord = st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})] ? wByEn(feat) : null;
           var hot = (feat===curFeat && !st.done[st.cur]) ? ' hot' : '';
           var fcls = fillWord ? ' filled' : '';
-          out += '<div class="fslot '+s.cls+hot+fcls+'" data-feat="'+feat+'" style="left:'+s.x+';top:'+s.y+'">'+(fillWord?'<span class="fi">'+pic(fillWord,30)+'<\/span>':'')+'<\/div>';
+          out += '<div class="fslot '+s.cls+hot+fcls+'" data-feat="'+feat+'" style="left:'+s.x+';top:'+s.y+'">'+(fillWord?'<span class="fi">'+pic(fillWord,30)+'</span>':'')+'</div>';
         });
       });
     }
@@ -551,29 +551,29 @@ function sPuzzle(){
   function render(){
     if(!st.alive) return;
     var w=st.items[st.cur];
-    var qline=(w && w.q)?'<div class="qline">'+esc(w.q)+'<\/div>':'';
+    var qline=(w && w.q)?'<div class="qline">'+esc(w.q)+'</div>':'';
     var tip=(UNIT.sc&&UNIT.sc.tip)||'听一听，把它放到场景里';
-    var deco=(UNIT.sc&&UNIT.sc.deco)?UNIT.sc.deco.map(function(d){ return '<span class="deco" style="left:'+d[0]+';top:'+d[1]+';font-size:'+(d[2]||40)+'px">'+d[3]+'<\/span>'; }).join(''):'';
-    var placedHtml=st.placed.map(function(p){ return '<span class="placed" style="left:'+p.x+';top:'+p.y+'">'+pic(p.w,44)+'<\/span>'; }).join('');
+    var deco=(UNIT.sc&&UNIT.sc.deco)?UNIT.sc.deco.map(function(d){ return '<span class="deco" style="left:'+d[0]+';top:'+d[1]+';font-size:'+(d[2]||40)+'px">'+d[3]+'</span>'; }).join(''):'';
+    var placedHtml=st.placed.map(function(p){ return '<span class="placed" style="left:'+p.x+';top:'+p.y+'">'+pic(p.w,44)+'</span>'; }).join('');
     var head='';
     if(face){
       head='<div class="pz-face">'
-        +'<div class="body"><\/div><div class="neck"><\/div><div class="hair"><\/div><div class="head"><\/div>'
-        +slotsHtml(st.cur)+'<\/div>';
+        +'<div class="body"></div><div class="neck"></div><div class="hair"></div><div class="head"></div>'
+        +slotsHtml(st.cur)+'</div>';
     }else{
-      head='<div class="pz-stage '+(UNIT.sc&&UNIT.sc.theme?UNIT.sc.theme:'')+'" id="pzStage">'+deco+placedHtml+'<\/div>';
+      head='<div class="pz-stage '+(UNIT.sc&&UNIT.sc.theme?UNIT.sc.theme:'')+'" id="pzStage">'+deco+placedHtml+'</div>';
     }
     var piecesHtml=st.items.map(function(wi,i){
       var used=st.done[i];
-      return '<button class="piece'+(used?' used':'')+'" data-i="'+i+'">'+pic(wi,54)+'<\/button>';
+      return '<button class="piece'+(used?' used':'')+'" data-i="'+i+'">'+pic(wi,54)+'</button>';
     }).join('');
     gameShell('情景拼图',
-      '<div class="panel ask"><div class="ghead"><span class="ht">🧩 情景拼图<\/span><span class="qbar qb2">第 '+(st.cur+1)+' / '+st.items.length+' 题<\/span><\/div>'
+      '<div class="panel ask"><div class="ghead"><span class="ht">🧩 情景拼图</span><span class="qbar qb2">第 '+(st.cur+1)+' / '+st.items.length+' 题</span></div>'
       +qline
-      +'<div class="ask-t">'+esc(tip)+'<\/div>'
-      +'<div class="ac" style="margin:10px 0"><button class="speak" id="puSpeak">🔊 再听一次<\/button><\/div>'
-      +'<div class="face-wrap">'+head+'<\/div>'
-      +'<div class="pieces">'+piecesHtml+'<\/div><\/div>');
+      +'<div class="ask-t">'+esc(tip)+'</div>'
+      +'<div class="ac" style="margin:10px 0"><button class="speak" id="puSpeak">🔊 再听一次</button></div>'
+      +'<div class="face-wrap">'+head+'</div>'
+      +'<div class="pieces">'+piecesHtml+'</div></div>');
     byId('puSpeak').onclick=function(){ if(w) speak(wSay(w)); };
     T(function(){ if(st.alive && w) speak(wSay(w)); },450);
     bindPieces();
@@ -698,6 +698,6 @@ window.addEventListener('load',function(){
   showHome();
 });
 
-<\/script>
-<\/body>
-<\/html>
+</script>
+</body>
+</html>
