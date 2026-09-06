@@ -3,40 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Big Fun 英语课堂游戏合集（第一、二册共16单元）</title>
+<title>Big Fun 课堂游戏合集</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{display:flex;flex-direction:column;background:#eef1f6}
-.head{background:linear-gradient(120deg,#f97316,#ef4444);color:#fff;padding:12px 16px 10px;box-shadow:0 3px 10px rgba(0,0,0,.18)}
-.head h1{font-size:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.head .sm{font-size:13px;opacity:.93;margin-top:3px;line-height:1.5}
-.books{display:flex;gap:12px;padding:10px 14px;flex-wrap:wrap;align-items:flex-start;background:#fff;border-bottom:2px solid #eee}
-.bsec{min-width:0;flex:1 1 430px}
-.bt{font-weight:900;font-size:15px;color:#6b7280;margin-bottom:6px}
-.ugrid{display:grid;grid-template-columns:repeat(8,minmax(84px,1fr));gap:6px}
-.ucard{display:flex;flex-direction:column;align-items:center;gap:2px;background:#fafafa;border:2px solid #e5e7eb;border-radius:12px;padding:6px 2px;cursor:pointer;color:#374151}
-.ucard.on{border-color:var(--c);background:#fff;box-shadow:0 0 0 2px var(--c);transform:translateY(-1px)}
-.ucard .ui{font-size:26px;line-height:1.1}
-.ucard .un{font-size:11px;font-weight:700;white-space:nowrap}
-.ucard .uz{font-size:10px;color:#9ca3af}
-@media(max-width:900px){.ugrid{grid-template-columns:repeat(4,1fr)}.ucard .ui{font-size:24px}}
-#frame{flex:1;border:0;width:100%;background:#fff;min-height:0}
+body{background:linear-gradient(180deg,#fff7ed,#eef1f6);font-family:"Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:#1f2937}
+.head{background:linear-gradient(120deg,#f97316,#ef4444);color:#fff;padding:16px 20px 12px;box-shadow:0 3px 12px rgba(0,0,0,.2);text-align:center}
+.head h1{font-size:clamp(20px,4vw,34px);display:flex;align-items:center;justify-content:center;gap:10px}
+.head .sm{font-size:clamp(12px,2vw,16px);opacity:.95;margin-top:6px;line-height:1.6}
+.wrap{max-width:1500px;margin:0 auto;padding:14px}
+.bsec{background:#fff;border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.bt{font-weight:900;font-size:clamp(15px,2.4vw,22px);color:#6b7280;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+@media(min-width:1400px){.ugrid{grid-template-columns:repeat(8,1fr)}}
+.ucard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fafafa;border:3px solid #e5e7eb;border-radius:16px;padding:14px 6px;cursor:pointer;color:#374151;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.06);transition:transform .1s}
+.ucard:hover,.ucard:active{transform:translateY(-2px) scale(1.03);border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 35%,transparent)}
+.ucard .ui{font-size:clamp(30px,4.5vw,46px);line-height:1.1}
+.ucard .un{font-size:clamp(13px,1.9vw,18px);font-weight:800}
+.ucard .un b{color:var(--c)}
+.ucard .uz{font-size:clamp(11px,1.5vw,14px);color:#9ca3af}
+@media(max-width:720px){.ugrid{grid-template-columns:repeat(4,1fr)}.ucard{padding:10px 4px}}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:6px 0 18px}
 </style>
 </head>
 <body>
-<div class="head"><h1>📚 Big Fun 课堂游戏合集</h1><div class="sm">上面先选第一册 / 第二册，再点单元；进入后点小游戏即可。 🔊=朗读　👁️=显示/隐藏单词　🏠=随时回本单元列表</div></div>
-<div class="books">
-<div class="bsec"><div class="bt">📗 第一册 Big Fun 1</div><div class="ugrid"><button class="ucard" data-k="BF1U1" style="--c:#f97316" title="我的教室"><span class="ui">📚</span><span class="un"><b>U1</b> My Classroom</span><span class="uz">我的教室</span></button><button class="ucard" data-k="BF1U2" style="--c:#f43f5e" title="我的身体"><span class="ui">👀</span><span class="un"><b>U2</b> My Body</span><span class="uz">我的身体</span></button><button class="ucard" data-k="BF1U3" style="--c:#ec4899" title="我的家人"><span class="ui">👨‍👩‍👧‍👦</span><span class="un"><b>U3</b> My Family</span><span class="uz">我的家人</span></button><button class="ucard" data-k="BF1U4" style="--c:#8b5cf6" title="我的玩具"><span class="ui">🧸</span><span class="un"><b>U4</b> My Toys</span><span class="uz">我的玩具</span></button><button class="ucard" data-k="BF1U5" style="--c:#f59e0b" title="我的午餐"><span class="ui">🥪</span><span class="un"><b>U5</b> My Lunch</span><span class="uz">我的午餐</span></button><button class="ucard" data-k="BF1U6" style="--c:#ec4899" title="我的衣服"><span class="ui">👕</span><span class="un"><b>U6</b> My Clothes</span><span class="uz">我的衣服</span></button><button class="ucard" data-k="BF1U7" style="--c:#22c55e" title="动物"><span class="ui">🐻</span><span class="un"><b>U7</b> Animals</span><span class="uz">动物</span></button><button class="ucard" data-k="BF1U8" style="--c:#6366f1" title="我的世界"><span class="ui">🌍</span><span class="un"><b>U8</b> My World</span><span class="uz">我的世界</span></button></div></div>
-<div class="bsec"><div class="bt">📘 第二册 Big Fun 2</div><div class="ugrid"><button class="ucard" data-k="BF2U1" style="--c:#0ea5e9" title="我的学校"><span class="ui">🎒</span><span class="un"><b>U1</b> My School</span><span class="uz">我的学校</span></button><button class="ucard" data-k="BF2U2" style="--c:#f43f5e" title="我的感官"><span class="ui">👀</span><span class="un"><b>U2</b> My Senses</span><span class="uz">我的感官</span></button><button class="ucard" data-k="BF2U3" style="--c:#f59e0b" title="食物"><span class="ui">🍗</span><span class="un"><b>U3</b> Food</span><span class="uz">食物</span></button><button class="ucard" data-k="BF2U4" style="--c:#d946ef" title="我的衣服"><span class="ui">🩳</span><span class="un"><b>U4</b> My Clothes</span><span class="uz">我的衣服</span></button><button class="ucard" data-k="BF2U5" style="--c:#22c55e" title="农场"><span class="ui">🚜</span><span class="un"><b>U5</b> The Farm</span><span class="uz">农场</span></button><button class="ucard" data-k="BF2U6" style="--c:#f97316" title="我的家人"><span class="ui">👨‍👩‍👧‍👦</span><span class="un"><b>U6</b> My Family</span><span class="uz">我的家人</span></button><button class="ucard" data-k="BF2U7" style="--c:#8b5cf6" title="我的玩具"><span class="ui">🚲</span><span class="un"><b>U7</b> My Toys</span><span class="uz">我的玩具</span></button><button class="ucard" data-k="BF2U8" style="--c:#6366f1" title="我的世界"><span class="ui">🌍</span><span class="un"><b>U8</b> My World</span><span class="uz">我的世界</span></button></div></div>
+<div class="head"><h1>📚 Big Fun 课堂游戏合集</h1><div class="sm">点击下面的单元卡片即可开始游戏 · 想换单元时，在游戏页右上角点 <b>📚 目录</b> 就能回到这里 · 每个单元都有 6 个小游戏</div></div>
+<div class="wrap">
+<div class="bsec"><div class="bt">📕 第一册 · Big Fun 1</div><div class="ugrid"><a class="ucard" href="units/BF1U1.html" style="--c:#f97316" title="我的教室"><span class="ui">📚</span><span class="un"><b>U1</b> My Classroom</span><span class="uz">我的教室</span></a><a class="ucard" href="units/BF1U2.html" style="--c:#f43f5e" title="我的身体"><span class="ui">👀</span><span class="un"><b>U2</b> My Body</span><span class="uz">我的身体</span></a><a class="ucard" href="units/BF1U3.html" style="--c:#ec4899" title="我的家人"><span class="ui">👨‍👩‍👧‍👦</span><span class="un"><b>U3</b> My Family</span><span class="uz">我的家人</span></a><a class="ucard" href="units/BF1U4.html" style="--c:#8b5cf6" title="我的玩具"><span class="ui">🧸</span><span class="un"><b>U4</b> My Toys</span><span class="uz">我的玩具</span></a><a class="ucard" href="units/BF1U5.html" style="--c:#f59e0b" title="我的午餐"><span class="ui">🥪</span><span class="un"><b>U5</b> My Lunch</span><span class="uz">我的午餐</span></a><a class="ucard" href="units/BF1U6.html" style="--c:#ec4899" title="我的衣服"><span class="ui">👕</span><span class="un"><b>U6</b> My Clothes</span><span class="uz">我的衣服</span></a><a class="ucard" href="units/BF1U7.html" style="--c:#22c55e" title="动物"><span class="ui">🐻</span><span class="un"><b>U7</b> Animals</span><span class="uz">动物</span></a><a class="ucard" href="units/BF1U8.html" style="--c:#6366f1" title="我的世界"><span class="ui">🌍</span><span class="un"><b>U8</b> My World</span><span class="uz">我的世界</span></a></div></div>
+<div class="bsec"><div class="bt">📗 第二册 · Big Fun 2</div><div class="ugrid"><a class="ucard" href="units/BF2U1.html" style="--c:#0ea5e9" title="我的学校"><span class="ui">🎒</span><span class="un"><b>U1</b> My School</span><span class="uz">我的学校</span></a><a class="ucard" href="units/BF2U2.html" style="--c:#f43f5e" title="我的感官"><span class="ui">👀</span><span class="un"><b>U2</b> My Senses</span><span class="uz">我的感官</span></a><a class="ucard" href="units/BF2U3.html" style="--c:#f59e0b" title="食物"><span class="ui">🍗</span><span class="un"><b>U3</b> Food</span><span class="uz">食物</span></a><a class="ucard" href="units/BF2U4.html" style="--c:#d946ef" title="我的衣服"><span class="ui">🩳</span><span class="un"><b>U4</b> My Clothes</span><span class="uz">我的衣服</span></a><a class="ucard" href="units/BF2U5.html" style="--c:#22c55e" title="农场"><span class="ui">🚜</span><span class="un"><b>U5</b> The Farm</span><span class="uz">农场</span></a><a class="ucard" href="units/BF2U6.html" style="--c:#f97316" title="我的家人"><span class="ui">👨‍👩‍👧‍👦</span><span class="un"><b>U6</b> My Family</span><span class="uz">我的家人</span></a><a class="ucard" href="units/BF2U7.html" style="--c:#8b5cf6" title="我的玩具"><span class="ui">🚲</span><span class="un"><b>U7</b> My Toys</span><span class="uz">我的玩具</span></a><a class="ucard" href="units/BF2U8.html" style="--c:#6366f1" title="我的世界"><span class="ui">🌍</span><span class="un"><b>U8</b> My World</span><span class="uz">我的世界</span></a></div></div>
 </div>
-<iframe id="frame" title="单元游戏"></iframe>
-<script>
-var frame=document.getElementById("frame");
-var cards=Array.prototype.slice.call(document.querySelectorAll(".ucard"));
-function setUnit(k){ if(!/^BF[12]U[1-8]$/.test(k)) return; cards.forEach(function(c){ c.classList.toggle("on", c.dataset.k===k); }); frame.src="units/"+k+".html"; }
-cards.forEach(function(c){ c.onclick=function(){ setUnit(c.dataset.k); }; });
-(function(){ try{ var u=new URLSearchParams(location.search).get("u"); if(/^BF[12]U[1-8]$/.test(u||"")){ setUnit(u); return; } }catch(e){} setUnit("BF1U1"); })();
-</script>
+<div class="foot">点单元开始 · 📚=目录 🔊=朗读 👁️=字幕 🏠=本单元游戏列表</div>
 </body>
 </html>
