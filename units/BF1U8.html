@@ -117,7 +117,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* 情景拼图 */
 .pz-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .pz-hint{background:rgba(255,255,255,.9);border:2px dashed #cbd5e1;border-radius:999px;padding:6px 16px;font-size:18px;font-weight:700;text-align:center}
-.pz-stage{position:relative;border-radius:24px;padding:18px;min-height:340px;border:3px solid rgba(0,0,0,.08);overflow:hidden;touch-action:manipulation}
+.pz-stage{position:relative;width:100%;max-width:1000px;border-radius:24px;padding:18px;min-height:380px;border:3px solid rgba(0,0,0,.08);overflow:hidden;touch-action:manipulation}
 .pz-stage .deco{position:absolute;pointer-events:none;opacity:.85;z-index:0;line-height:1}
 .pz-stage .zone{position:absolute;inset:0;z-index:2}
 .pz-stage .placed{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25));transform:translate(-50%,-50%)}
@@ -137,30 +137,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .sc-toy2{background:linear-gradient(175deg,#fbcfe8 0 45%,#c7d2fe 45% 75%,#fef08a 75%)}
 .sc-world{background:linear-gradient(175deg,#a5b4fc 0 38%,#fecdd3 38% 70%,#bbf7d0 70%)}
 /* 人脸拼图 */
-.face-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-.pz-face{position:relative;width:360px;height:430px;background:transparent}
-.pz-face .head{position:absolute;left:50%;top:22px;width:250px;height:300px;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-radius:48% 48% 42% 42%}
-.pz-face .hair{position:absolute;left:50%;top:10px;width:270px;height:120px;transform:translateX(-50%);background:#8b5a2b;border-radius:50% 50% 34% 34%}
-.pz-face .neck{position:absolute;left:50%;top:300px;width:70px;height:70px;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-top:none;border-radius:0 0 20px 20px}
-.pz-face .body{position:absolute;left:50%;top:356px;width:220px;height:80px;transform:translateX(-50%);background:#60a5fa;border:4px solid #3b82f6;border-radius:22px}
-.fslot{position:absolute;z-index:5;border:4px dashed rgba(120,90,40,.75);background:rgba(255,255,255,.28);border-radius:14px;transition:.15s}
-.fslot.s-eye{width:58px;height:40px}
-.fslot.s-nose{width:44px;height:56px;border-radius:50%}
-.fslot.s-mouth{width:74px;height:34px}
-.fslot.s-ear{width:52px;height:44px}
-.fslot.hot{animation:pulse 1s infinite}
-.fslot .fi{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.fslot .fi .ic{font-size:34px;line-height:1}
-.fslot .fi .sv{width:34px;height:34px}
-.fslot.filled{border-style:solid;border-color:#16a34a;background:#fff}
+.face-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.pz-face{position:relative;width:min(460px,86vw);height:min(540px,100vw);background:transparent;touch-action:manipulation}
+.pz-face .head{position:absolute;left:50%;top:3.5%;width:59%;height:57%;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-radius:48% 48% 42% 42%}
+.pz-face .hair{position:absolute;left:50%;top:-1%;width:63%;height:23%;transform:translateX(-50%);background:#8b5a2b;border-radius:50% 50% 34% 34%}
+.pz-face .neck{position:absolute;left:50%;top:57%;width:15%;height:16%;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-top:none;border-radius:0 0 20px 20px}
+.pz-face .body{position:absolute;left:50%;top:72%;width:54%;height:30%;transform:translateX(-50%);background:#60a5fa;border:4px solid #3b82f6;border-radius:22px}
+.fslot{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);transition:.15s;touch-action:manipulation}
+.fslot .ficon{font-size:clamp(26px,5.4vw,40px);line-height:1;display:inline-block}
+.fslot.s-eye{width:clamp(58px,13vw,96px);height:clamp(44px,10vw,70px);border-radius:50%}
+.fslot.s-nose{width:clamp(46px,10vw,76px);height:clamp(56px,12vw,92px);border-radius:46%}
+.fslot.s-mouth{width:clamp(76px,16vw,120px);height:clamp(44px,9vw,66px);border-radius:20px}
+.fslot.s-ear{width:clamp(50px,11vw,84px);height:clamp(44px,9.5vw,68px);border-radius:46%}
+.fslot.hot{border:4px dashed rgba(249,115,22,.9);background:rgba(255,220,180,.3);animation:pulse 1s infinite}
+.fslot.hot .ghost{display:inline-block;opacity:.38}
+.fslot.filled{border:none;background:transparent;pointer-events:none}
+.fslot.filled .ficon{filter:drop-shadow(0 3px 3px rgba(0,0,0,.18))}
 
 /* 拼图碎片 */
-.pieces{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.piece{width:120px;min-height:118px;background:#fff;border:4px solid #e5e7eb;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px;transition:.12s;touch-action:none;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.piece .ic{font-size:56px;line-height:1}
-.piece .sv{width:62px;height:62px}
-.piece .en{font-size:15px;font-weight:800}
-.piece .zh{font-size:11px;color:#9ca3af}
+.pieces{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.piece{width:clamp(110px,19vw,170px);min-height:clamp(116px,20vw,160px);background:#fff;border:4px solid #e5e7eb;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;transition:.12s;touch-action:none;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.piece .ic{font-size:clamp(54px,9vw,78px);line-height:1}
+.piece .sv{width:clamp(62px,11vw,88px);height:clamp(62px,11vw,88px)}
+.piece .fprow{display:flex;gap:6px;align-items:center;justify-content:center;min-height:clamp(52px,9vw,72px);width:100%;line-height:1}
+.piece .fprow .ficon{font-size:clamp(42px,7.5vw,64px)}
+.piece .en{font-size:clamp(15px,2.2vw,19px);font-weight:800}
+.piece .zh{font-size:clamp(11px,1.6vw,14px);color:#9ca3af}
 .piece.sel{border-color:var(--ac);box-shadow:0 0 0 4px var(--ac);transform:scale(1.06)}
 .piece.used{opacity:.15;pointer-events:none;filter:grayscale(1)}
 .piece.shake{animation:shake .3s;border-color:#ef4444}
@@ -182,19 +184,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes up{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-120px)}}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;background:#111827;color:#fff;padding:12px 22px;border-radius:999px;font-size:18px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.3);animation:tp .2s}
 @keyframes tp{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+.edmask{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:400;display:flex;align-items:center;justify-content:center;padding:12px}
+.edpanel{width:min(96vw,920px);max-height:92vh;overflow:auto}
+.edpanel .ht{font-size:22px}
+.edrows{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.edrow{display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:6px}
+.edrow input{flex:1;min-width:70px;font-family:inherit;font-size:clamp(14px,2vw,17px);padding:8px 10px;border:2px solid #e5e7eb;border-radius:10px}
+.edrow .ed-ic{flex:1.5}
+.edrow .eddel{font-size:clamp(18px,2.4vw,22px);padding:6px 8px;border-radius:10px}
+.eddel:hover{background:#fee2e2}
 @media(max-width:640px){.opt-grid{grid-template-columns:repeat(2,1fr)}.gcell{min-height:120px}.gcell .ic{font-size:52px!important}.mcard .ic{font-size:46px!important}.ttl{font-size:18px!important}}
 </style>
 </head>
 <body style="--ac:#6366f1;background:#eef1f6">
-<div class="topbar"><a class="tbtn" href="../index.html" title="返回单元目录" style="text-decoration:none">📚<small>目录</small></a><button class="tbtn" id="btnHome" title="返回游戏列表">🏠<small>游戏列表</small></button><div class="ttl"><span>🌍 Unit 8 · My World</span><span class="sub">　Big Fun 1 · U8 · 我的世界</span></div><button class="tbtn" id="btnVoice" title="朗读开关">🔊<small>朗读</small></button><button class="tbtn" id="btnText" title="字幕开关">👁️<small>字幕</small></button></div>
+<div class="topbar"><button class="tbtn" id="btnHome" title="返回游戏列表">🏠<small>游戏列表</small></button><button class="tbtn" id="btnDir" title="返回全部单元目录">📚<small>全部单元</small></button><div class="ttl"><span>🌍 Unit 8 · My World</span><span class="sub">　Big Fun 1 · U8 · 我的世界</span></div><button class="tbtn" id="btnVoice" title="朗读开关">🔊<small>朗读</small></button><button class="tbtn" id="btnText" title="字幕开关">👁️<small>字幕</small></button><button class="tbtn" id="btnEdit" title="老师改本单元单词">✏️<small>单词</small></button></div>
 <div id="screen"></div>
 <script>window.UNIT = {"key": "BF1U8", "book": "Big Fun 1", "num": "U8", "name": "Unit 8 · My World", "cn": "我的世界", "emoji": "🌍", "accent": "#6366f1", "file": "BF1_U8_My_World.html", "sc": {"theme": "sc-town", "face": false, "tip": "听一听，把叔叔阿姨送回工作的地方", "items": ["police officer", "firefighter", "bus driver", "nurse", "doctor", "dentist", "teacher", "farmer"], "title": "", "deco": [[4, 6, 56, "🏫"], [82, 8, 56, "🏥"], [88, 56, 54, "🚒"], [42, 84, 44, "🚓"], [8, 84, 42, "🚌"]]}, "words": [{"en": "police officer", "zh": "警察", "icon": "👮"}, {"en": "firefighter", "zh": "消防员", "icon": "🧑‍🚒"}, {"en": "bus driver", "zh": "公交司机", "icon": "🚌"}, {"en": "nurse", "zh": "护士", "icon": "👩‍⚕️"}, {"en": "doctor", "zh": "医生", "icon": "👨‍⚕️"}, {"en": "dentist", "zh": "牙医", "icon": "🦷"}, {"en": "teacher", "zh": "老师", "icon": "🧑‍🏫"}, {"en": "farmer", "zh": "农民", "icon": "🧑‍🌾"}, {"en": "cook", "zh": "厨师", "icon": "🧑‍🍳"}, {"en": "pilot", "zh": "飞行员", "icon": "👨‍✈️"}]};
 </script>
 <script>/* Big Fun 合订课堂小游戏 · 引擎 */
 "use strict";
 var UNIT = window.UNIT;
-var WORDS = UNIT.words;
 var AC = UNIT.accent || '#f97316';
+var WKEY = 'bigfun_v2_words_' + UNIT.key;
+function _savedWords(){ try{ var v=JSON.parse(localStorage.getItem(WKEY)||'null'); if(v && v.length) return v; }catch(e){} return null; }
+var WORDS = _savedWords() || UNIT.words.slice();
+function _useWords(){ WORDS = _savedWords() || UNIT.words.slice(); }
 var $ = function(s){ return document.querySelector(s); };
 var $$ = function(s){ return Array.from(document.querySelectorAll(s)); };
 var screenEl = $('#screen');
@@ -257,18 +271,12 @@ function showHome(){
 function startGame(id){
   var g=GAME_LIST.find(function(x){return x.id===id;}); if(!g) return;
   curGame=id;
-  var intro=document.createElement('div');
-  paint('<div class="panel ac" style="padding:36px 22px"><div style="font-size:88px">'+g.icon+'</div><h2 style="font-size:32px;margin:10px 0">'+esc(g.name)+'</h2><p style="color:#6b7280;font-size:18px;margin:6px 0 4px">'+esc(g.desc)+'</p>'
-    +'<div style="color:#9ca3af;font-size:14px;margin-bottom:18px">👂 可以随时点左上角 🏠 返回游戏列表</div>'
-    +'<div class="row center"><button class="btn big" id="goStart">▶ 开始游戏</button></div></div>');
-  byId('goStart').onclick=function(){
-    if(id==='lp'){ sListen(); }
-    else if(id==='miss'){ sMissing(); }
-    else if(id==='odd'){ sOdd(); }
-    else if(id==='fl'){ sFlip(); }
-    else if(id==='wh'){ sWhack(); }
-    else if(id==='pu'){ sPuzzle(); }
-  };
+  if(id==='lp'){ sListen(); }
+  else if(id==='miss'){ sMissing(); }
+  else if(id==='odd'){ sOdd(); }
+  else if(id==='fl'){ sFlip(); }
+  else if(id==='wh'){ sWhack(); }
+  else if(id==='pu'){ sPuzzle(); }
 }
 function endGame(title){
   stopGame();
@@ -281,11 +289,81 @@ function endGame(title){
   byId('againBtn').onclick=function(){ startGame(id); };
   byId('homeBtn').onclick=showHome;
 }
+/* 老师编辑单词 */
+function wordEditor(){
+  stopGame();
+  var list=WORDS.map(function(w){ return {en:w.en,zh:w.zh||'',icon:w.icon||'',svg:!!w.svg}; });
+  var mask=document.createElement('div'); mask.className='edmask';
+  document.body.appendChild(mask);
+  function draw(){
+    var rows=list.map(function(w,i){
+      return '<div class="edrow">'
+        +'<input class="ed-en" value="'+esc(w.en)+'" placeholder="英文单词" spellcheck="false">'
+        +'<input class="ed-zh" value="'+esc(w.zh)+'" placeholder="中文意思">'
+        +'<input class="ed-ic" value="'+esc(w.icon)+'" placeholder="图片符号 如 🍎（留空=保留原图）">'
+        +'<button class="eddel" data-i="'+i+'" title="删除这一行">🗑️</button></div>';
+    }).join('');
+    mask.innerHTML='<div class="panel edpanel">'
+      +'<div class="ghead"><span class="ht">✏️ 老师改本单元单词</span></div>'
+      +'<p class="subnote">每行一个单词：英文、中文、图片符号。保存后本单元所有小游戏都会用新词。改错可一键恢复默认。</p>'
+      +'<div class="edrows">'+(rows||'<div class="subnote">还没有单词</div>')+'</div>'
+      +'<div class="row center" style="margin-top:14px;flex-wrap:wrap;gap:10px">'
+      +'<button class="btn ghost" id="edAdd">➕ 加一个词</button>'
+      +'<button class="btn big" id="edSave">💾 保存</button>'
+      +'<button class="btn ghost" id="edReset">♻️ 恢复默认</button>'
+      +'<button class="btn ghost" id="edClose">✖ 返回</button></div></div>';
+    byId('edAdd').onclick=function(){ sync(); list.push({en:'',zh:'',icon:'',svg:false}); draw(); };
+    byId('edSave').onclick=function(){ sync(); save(); };
+    byId('edReset').onclick=function(){ try{ localStorage.removeItem(WKEY); }catch(e){} _useWords(); close(); showHome(); toast('已恢复默认单词'); };
+    byId('edClose').onclick=function(){ close(); };
+    var dels=mask.querySelectorAll('.eddel');
+    for(var k=0;k<dels.length;k++){
+      (function(b){ b.onclick=function(){ sync(); var i=+b.dataset.i; if(i>=0&&i<list.length) list.splice(i,1); draw(); }; })(dels[k]);
+    }
+  }
+  function sync(){
+    var rows=mask.querySelectorAll('.edrow'); list=[];
+    for(var k=0;k<rows.length;k++){ var r=rows[k]; list.push({en:r.querySelector('.ed-en').value.trim(),zh:r.querySelector('.ed-zh').value.trim(),icon:r.querySelector('.ed-ic').value.trim(),svg:false}); }
+  }
+  function save(){
+    sync();
+    var out=[]; var seen={};
+    for(var k=0;k<list.length;k++){
+      var w=list[k];
+      if(!w.en && !w.zh) continue;
+      if(!w.en) w.en='word';
+      var key=w.en.toLowerCase();
+      if(seen[key]) continue; seen[key]=1;
+      var base=null;
+      for(var j=0;j<UNIT.words.length;j++){ if(UNIT.words[j].en.toLowerCase()===key){ base=UNIT.words[j]; break; } }
+      if(base){
+        var nw={}; for(var kk in base){ nw[kk]=base[kk]; }
+        nw.en=w.en; nw.zh=w.zh||base.zh||w.en;
+        if(w.icon){ nw.icon=w.icon; delete nw.svg; }
+        out.push(nw);
+      }else{
+        out.push({en:w.en,zh:w.zh||w.en,icon:w.icon||(w.en.charAt(0).toUpperCase())});
+      }
+    }
+    if(!out.length){ toast('至少保留一个单词哦'); return; }
+    try{ localStorage.setItem(WKEY, JSON.stringify(out)); }catch(e){}
+    WORDS=out; close(); showHome(); toast('✅ 单词已保存，小游戏已更新');
+  }
+  function close(){ if(mask.parentNode) mask.parentNode.removeChild(mask); }
+  draw();
+}
 /* 顶栏 */
 function bindTop(){
-  byId('btnHome').onclick=function(){ showHome(); };
+  var bh=byId('btnHome'); if(bh){ bh.onclick=function(){ showHome(); }; }
+  var bd=byId('btnDir');
+  if(bd){ bd.onclick=function(){
+    try{ if(window.self!==window.top && window.top.DOCS){ return; } }catch(e){}
+    location.href='../index.html';
+  }; }
+
   byId('btnVoice').onclick=function(){ prefs.voice=!prefs.voice; savePrefs(); byId('btnVoice').classList.toggle('on',prefs.voice); toast(prefs.voice?'🔊 朗读已开':'🔇 朗读已关'); };
   byId('btnText').onclick=function(){ prefs.text=!prefs.text; savePrefs(); byId('btnText').classList.toggle('on',prefs.text); toast(prefs.text?'👁 显示英文':'🙈 只显示图片'); if(curGame && curGame==='pu'){ sPuzzle(); } };
+  var eb=byId('btnEdit'); if(eb){ eb.onclick=function(){ wordEditor(); }; }
   try{ byId('btnVoice').classList.toggle('on',prefs.voice); byId('btnText').classList.toggle('on',prefs.text); }catch(e){}
 }
 /* ① 听音找图 */
@@ -510,11 +588,24 @@ function sPuzzle(){
   var face = !!(UNIT.sc && UNIT.sc.face);
   var FACE_ORDER=['eyes','ears','nose','mouth'];
   var FACE_SLOTS={
-    eyes:[{k:'e-l',x:'18%',y:'33%',cls:'s-eye'},{k:'e-r',x:'66%',y:'33%',cls:'s-eye'}],
-    ears:[{k:'a-l',x:'0%',y:'34%',cls:'s-ear'},{k:'a-r',x:'80%',y:'34%',cls:'s-ear'}],
-    nose:[{k:'n',x:'42%',y:'48%',cls:'s-nose'}],
-    mouth:[{k:'m',x:'36%',y:'66%',cls:'s-mouth'}]
+    eyes:[{k:'e-l',x:'28%',y:'35%',cls:'s-eye'},{k:'e-r',x:'72%',y:'35%',cls:'s-eye'}],
+    ears:[{k:'a-l',x:'3.5%',y:'38%',cls:'s-ear'},{k:'a-r',x:'96.5%',y:'38%',cls:'s-ear'}],
+    nose:[{k:'n',x:'50%',y:'51%',cls:'s-nose'}],
+    mouth:[{k:'m',x:'50%',y:'67%',cls:'s-mouth'}]
   };
+  var FACE_ICON={eyes:'👁️',ears:'👂',nose:'👃',mouth:'👄'};
+  function faceGlyph(feat, side){
+    var c=FACE_ICON[feat]||'';
+    if(feat==='eyes') return '<span class="ficon">'+c+'</span>';
+    var mir=(feat==='ears' && side==='l');
+    return '<span class="ficon"'+(mir?' style="transform:scaleX(-1)"':'')+'>'+c+'</span>';
+  }
+  function facePair(feat){
+    var c=FACE_ICON[feat]||'';
+    if(feat==='eyes') return '<span class="fprow"><span class="ficon">'+c+'</span><span class="ficon">'+c+'</span></span>';
+    if(feat==='ears') return '<span class="fprow"><span class="ficon" style="transform:scaleX(-1)">'+c+'</span><span class="ficon">'+c+'</span></span>';
+    return '<span class="fprow"><span class="ficon">'+c+'</span></span>';
+  }
   function wByEn(en){ return WORDS.find(function(w){ return w.en.toLowerCase()===en.toLowerCase(); }); }
   var st={alive:true,face:face,items:[],cur:0,placed:[],done:[],sel:null};
   if(face){
@@ -526,19 +617,18 @@ function sPuzzle(){
   }
   st.items=shuffle(st.items);
   st.done=st.items.map(function(){return false;});
-  function slotsHtml(round){
-    var w=st.items[st.cur]; var curFeat=w.en.toLowerCase();
-    var names=face?FACE_SLOTS[w.en.toLowerCase()]?[w.en.toLowerCase()]:[]:null;
+  function featIdx(feat){ return st.items.findIndex(function(x){ return x.en.toLowerCase()===feat; }); }
+  function slotsHtml(){
+    var w=st.items[st.cur]; var curFeat=w?w.en.toLowerCase():'';
     var out='';
     if(face){
       Object.keys(FACE_SLOTS).forEach(function(feat){
-        var arr=FACE_SLOTS[feat];
-        arr.forEach(function(s,si){
-          var filled = (feat!=='eyes'&&feat!=='ears') ? st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})] : st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})];
-          var fillWord = st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})] ? wByEn(feat) : null;
-          var hot = (feat===curFeat && !st.done[st.cur]) ? ' hot' : '';
-          var fcls = fillWord ? ' filled' : '';
-          out += '<div class="fslot '+s.cls+hot+fcls+'" data-feat="'+feat+'" style="left:'+s.x+';top:'+s.y+'">'+(fillWord?'<span class="fi">'+pic(fillWord,30)+'</span>':'')+'</div>';
+        var di=featIdx(feat); var d=(di>=0)?st.done[di]:false;
+        var hot=(feat===curFeat && !d);
+        FACE_SLOTS[feat].forEach(function(s){
+          if(!d && !hot) return;
+          var side=s.k.split('-')[1]||'c';
+          out += '<div class="fslot '+s.cls+(d?' filled':'')+(hot?' hot':'')+'" data-feat="'+feat+'" style="left:'+s.x+';top:'+s.y+'">'+(d?faceGlyph(feat,side):'<span class="ghost">'+faceGlyph(feat,side)+'</span>')+'</div>';
         });
       });
     }
@@ -559,13 +649,15 @@ function sPuzzle(){
     if(face){
       head='<div class="pz-face">'
         +'<div class="body"></div><div class="neck"></div><div class="hair"></div><div class="head"></div>'
-        +slotsHtml(st.cur)+'</div>';
+        +slotsHtml()+'</div>';
     }else{
       head='<div class="pz-stage '+(UNIT.sc&&UNIT.sc.theme?UNIT.sc.theme:'')+'" id="pzStage">'+deco+placedHtml+'</div>';
     }
     var piecesHtml=st.items.map(function(wi,i){
       var used=st.done[i];
-      return '<button class="piece'+(used?' used':'')+'" data-i="'+i+'">'+pic(wi,54)+'</button>';
+      var key=wi.en.toLowerCase();
+      var body=(face && FACE_ICON[key]) ? facePair(key) : pic(wi,54);
+      return '<button class="piece'+(used?' used':'')+'" data-i="'+i+'">'+body+lbl(wi)+'</button>';
     }).join('');
     gameShell('情景拼图',
       '<div class="panel ask"><div class="ghead"><span class="ht">🧩 情景拼图</span><span class="qbar qb2">第 '+(st.cur+1)+' / '+st.items.length+' 题</span></div>'
