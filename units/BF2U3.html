@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unit 3 · Food · 食物<\/title>
+<style>﻿/* Big Fun 合订课堂游戏 · 大屏版 */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:#eef1f6;color:#1f2937;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.hide{display:none!important}
+.screen{max-width:1160px;margin:0 auto;padding:14px}
+.panel{background:#fff;border-radius:20px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.07);margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.center{justify-content:center}
+.ac{text-align:center}
+
+/* 顶栏 */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;background:var(--ac);color:#fff;padding:12px 16px;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.topbar .ttl{font-size:22px;font-weight:800;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .sub{font-size:13px;opacity:.9}
+.tbtn{background:rgba(255,255,255,.24);border-radius:12px;padding:8px 12px;font-size:20px;color:#fff;min-width:46px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.tbtn small{display:block;font-size:11px;font-weight:700}
+.tbtn.on{background:#fff;color:var(--ac)}
+.tbtn:active{transform:scale(.92)}
+
+/* 首页游戏选单 */
+.home-top{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,var(--ac),#f59e0b);color:#fff;border-radius:22px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.15);margin-bottom:16px}
+.home-top .big{font-size:64px;line-height:1}
+.home-top h2{font-size:28px}
+.home-top p{font-size:16px;opacity:.95;margin-top:4px}
+.game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:820px){.game-grid{grid-template-columns:repeat(3,1fr)}}
+.game-card{background:#fff;border-radius:22px;padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-bottom:6px solid var(--gc,#f59e0b);transition:transform .1s}
+.game-card:active{transform:scale(.95)}
+.game-card .gi{font-size:56px;line-height:1}
+.game-card .gn{font-size:22px;font-weight:900}
+.game-card .gd{font-size:15px;color:#6b7280;text-align:center}
+.word-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+.wchip{background:#fff;border:2px solid #e5e7eb;border-radius:16px;min-width:120px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.wchip .ic{font-size:46px;line-height:1}
+.wchip .sv{width:52px;height:52px}
+.wchip .en{font-weight:800;font-size:16px}
+.wchip .zh{color:#9ca3af;font-size:12px}
+
+/* 题干/小工具 */
+.ghead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.ht{font-size:26px;font-weight:900}
+.qbar{font-size:16px;font-weight:700;color:#374151;background:#fff;border-radius:999px;padding:8px 16px;box-shadow:0 2px 5px rgba(0,0,0,.07);white-space:nowrap}
+.qb2{background:var(--ac);color:#fff}
+.ask-t{font-size:20px;font-weight:800;text-align:center;color:#374151}
+.subnote{color:#6b7280;text-align:center;font-size:14px}
+
+/* 大图片选择按钮 */
+.opt-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:720px){.opt-grid{grid-template-columns:repeat(4,1fr)}}
+.gcell{background:#fff;border:4px solid #e5e7eb;border-radius:20px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;font-weight:800;transition:transform .08s}
+.gcell .pic{display:flex;align-items:center;justify-content:center;min-height:86px}
+.gcell .ic{line-height:1}
+.gcell .sv{width:80px;height:80px}
+.gcell .en{font-size:19px}
+.gcell .zh{font-size:13px;color:#9ca3af;font-weight:400}
+.gcell:active{transform:scale(.95)}
+.gcell.ok{border-color:#22c55e;background:#f0fdf4;animation:bounce .5s}
+.gcell.no{border-color:#ef4444;background:#fef2f2;animation:shake .35s}
+.gcell.dim{opacity:.2;pointer-events:none}
+.speak{font-size:30px;background:#fff;border:3px solid #e5e7eb;border-radius:18px;padding:10px 24px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 2px 6px rgba(0,0,0,.07);color:var(--ac)}
+.speak:active{transform:scale(.92)}
+.speak.big{font-size:64px;padding:12px 34px;min-height:100px;border-color:#fbbf24;border-radius:26px;display:flex;margin:0 auto}
+.speak small{font-size:14px;color:#6b7280}
+.qline{background:#fff7ed;border:2px solid #fcd34d;border-radius:16px;padding:8px 14px;font-size:20px;font-weight:800;color:#92400e;text-align:center;max-width:560px;margin:0 auto 10px}
+
+/* 按钮 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:12px 22px;font-size:19px;font-weight:800;background:var(--ac);color:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.btn.ghost{background:#fff;color:#374151;border:2px solid #d1d5db;box-shadow:none}
+.btn.big{padding:16px 34px;font-size:24px}
+.btn:active{transform:scale(.95)}
+
+/* 谁不见了 */
+.mem4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:760px;margin:0 auto}
+.mcard{background:#fff;border:3px solid #e5e7eb;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;min-height:140px;transition:.3s}
+.mcard .ic{font-size:62px;line-height:1}
+.mcard .sv{width:76px;height:76px}
+.mcard .en{font-weight:800;font-size:16px}
+.mcard .zh{font-size:12px;color:#9ca3af}
+.mcard.fly{transform:translateY(-30px) scale(.6);opacity:0}
+.mcard.gone{background:#f3f4f6;border-style:dashed;color:#cbd5e1}
+.mcard.gone .bigq{font-size:56px}
+.empty-q{font-size:52px;opacity:.5}
+
+/* 打地鼠 */
+.holes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:760px;margin:0 auto}
+.hole{background:#fff;border:4px solid #d1d5db;border-radius:50%;height:150px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;box-shadow:inset 0 6px 12px rgba(0,0,0,.12)}
+.mole{width:88%;height:88%;background:#fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translateY(120%) scale(.5);transition:transform .16s;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.mole.up{transform:translateY(0) scale(1)}
+.mole .ic{font-size:52px;line-height:1}
+.mole .sv{width:56px;height:56px}
+.hole.hitok{animation:bounce .5s;border-color:#22c55e;background:#f0fdf4}
+.hole.hitno{animation:shake .3s;border-color:#ef4444;background:#fef2f2}
+.scoreline{font-size:20px;font-weight:800;color:#374151;text-align:center}
+
+/* 翻翻乐 */
+.fl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:680px;margin:0 auto}
+@media(min-width:760px){.fl-grid{max-width:820px}}
+.flcard{aspect-ratio:.86;border-radius:18px;perspective:600px;cursor:pointer}
+.flcard .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .35s}
+.flcard.open .in{transform:rotateY(180deg)}
+.flcard .face{position:absolute;inset:0;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:46px;font-weight:900}
+.flcard .back{background:linear-gradient(145deg,var(--ac),#7c3aed);color:#fff;font-size:50px}
+.flcard .front{background:#fff;border:3px solid #e5e7eb;transform:rotateY(180deg);flex-direction:column;gap:2px}
+.flcard .front .ic{font-size:52px;line-height:1}
+.flcard .front .sv{width:60px;height:60px}
+.flcard .front .en{font-size:14px;font-weight:800}
+.flcard.done .back{background:#d1fae5;color:#22c55e}
+
+/* 情景拼图 */
+.pz-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pz-hint{background:rgba(255,255,255,.9);border:2px dashed #cbd5e1;border-radius:999px;padding:6px 16px;font-size:18px;font-weight:700;text-align:center}
+.pz-stage{position:relative;border-radius:24px;padding:18px;min-height:340px;border:3px solid rgba(0,0,0,.08);overflow:hidden;touch-action:manipulation}
+.pz-stage .deco{position:absolute;pointer-events:none;opacity:.85;z-index:0;line-height:1}
+.pz-stage .zone{position:absolute;inset:0;z-index:2}
+.pz-stage .placed{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25));transform:translate(-50%,-50%)}
+.pz-stage .placed .ic{line-height:1}
+.pz-stage .placed .sv{width:56px;height:56px}
+.sc-picnic{background:linear-gradient(175deg,#d9f2ff 0 42%,#c9f7cf 42% 66%,#fde68a 66%)}
+.sc-classroom{background:linear-gradient(175deg,#fef3c7 0 34%,#fde68a 34% 62%,#d9b98a 62%)}
+.sc-family{background:linear-gradient(175deg,#ffe4ef 0 55%,#d7c9f5 55% 72%,#c9a9e8 72%)}
+.sc-toyroom{background:linear-gradient(175deg,#e0f2fe 0 40%,#ffe4e6 40% 75%,#fde68a 75%)}
+.sc-wardrobe{background:linear-gradient(175deg,#fce7f3 0 45%,#e9d5ff 45% 70%,#bfdbfe 70%)}
+.sc-farm{background:linear-gradient(175deg,#bae6fd 0 42%,#bbf7d0 42% 70%,#fcd34d 70%)}
+.sc-town{background:linear-gradient(175deg,#c7d2fe 0 40%,#fecdd3 40% 72%,#bbf7d0 72%)}
+.sc-school{background:linear-gradient(175deg,#fde68a 0 45%,#d9f99d 45%)}
+.sc-dining{background:linear-gradient(175deg,#fff1c9 0 52%,#d9a06b 52%)}
+.sc-beach{background:linear-gradient(175deg,#bae6fd 0 60%,#fde68a 60%)}
+.sc-farm2{background:linear-gradient(175deg,#bfdbfe 0 40%,#d9f99d 40% 72%,#fbbf24 72%)}
+.sc-toy2{background:linear-gradient(175deg,#fbcfe8 0 45%,#c7d2fe 45% 75%,#fef08a 75%)}
+.sc-world{background:linear-gradient(175deg,#a5b4fc 0 38%,#fecdd3 38% 70%,#bbf7d0 70%)}
+/* 人脸拼图 */
+.face-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pz-face{position:relative;width:360px;height:430px;background:transparent}
+.pz-face .head{position:absolute;left:50%;top:22px;width:250px;height:300px;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-radius:48% 48% 42% 42%}
+.pz-face .hair{position:absolute;left:50%;top:10px;width:270px;height:120px;transform:translateX(-50%);background:#8b5a2b;border-radius:50% 50% 34% 34%}
+.pz-face .neck{position:absolute;left:50%;top:300px;width:70px;height:70px;transform:translateX(-50%);background:#ffd9a8;border:4px solid #d9a066;border-top:none;border-radius:0 0 20px 20px}
+.pz-face .body{position:absolute;left:50%;top:356px;width:220px;height:80px;transform:translateX(-50%);background:#60a5fa;border:4px solid #3b82f6;border-radius:22px}
+.fslot{position:absolute;z-index:5;border:4px dashed rgba(120,90,40,.75);background:rgba(255,255,255,.28);border-radius:14px;transition:.15s}
+.fslot.s-eye{width:58px;height:40px}
+.fslot.s-nose{width:44px;height:56px;border-radius:50%}
+.fslot.s-mouth{width:74px;height:34px}
+.fslot.s-ear{width:52px;height:44px}
+.fslot.hot{animation:pulse 1s infinite}
+.fslot .fi{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.fslot .fi .ic{font-size:34px;line-height:1}
+.fslot .fi .sv{width:34px;height:34px}
+.fslot.filled{border-style:solid;border-color:#16a34a;background:#fff}
+
+/* 拼图碎片 */
+.pieces{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.piece{width:120px;min-height:118px;background:#fff;border:4px solid #e5e7eb;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px;transition:.12s;touch-action:none;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.piece .ic{font-size:56px;line-height:1}
+.piece .sv{width:62px;height:62px}
+.piece .en{font-size:15px;font-weight:800}
+.piece .zh{font-size:11px;color:#9ca3af}
+.piece.sel{border-color:var(--ac);box-shadow:0 0 0 4px var(--ac);transform:scale(1.06)}
+.piece.used{opacity:.15;pointer-events:none;filter:grayscale(1)}
+.piece.shake{animation:shake .3s;border-color:#ef4444}
+.dghost{position:fixed;pointer-events:none;z-index:999;width:92px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:3px dashed var(--ac);border-radius:16px;opacity:.95;transform:translate(-50%,-50%) scale(.9);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.dghost .ic{font-size:54px;line-height:1}
+.dghost .sv{width:58px;height:58px}
+
+/* 完成页 */
+.end{text-align:center;padding:40px 20px}
+.end .em{font-size:88px;line-height:1}
+.end h2{font-size:34px;margin:10px 0}
+.endbtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.12)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(249,115,22,.5)}50%{box-shadow:0 0 0 9px rgba(249,115,22,.12)}}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
+.fx span{position:absolute;font-size:30px;animation:up 1s ease-out forwards}
+@keyframes up{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-120px)}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;background:#111827;color:#fff;padding:12px 22px;border-radius:999px;font-size:18px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.3);animation:tp .2s}
+@keyframes tp{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:640px){.opt-grid{grid-template-columns:repeat(2,1fr)}.gcell{min-height:120px}.gcell .ic{font-size:52px!important}.mcard .ic{font-size:46px!important}.ttl{font-size:18px!important}}
+<\/style>
+<\/head>
+<body style="--ac:#f59e0b;background:#eef1f6">
+<div class="topbar"><button class="tbtn" id="btnHome" title="返回游戏列表">🏠<small>游戏列表<\/small><\/button><div class="ttl"><span>🍗 Unit 3 · Food<\/span><span class="sub">　Big Fun 2 · U3 · 食物<\/span><\/div><button class="tbtn" id="btnVoice" title="朗读开关">🔊<small>朗读<\/small><\/button><button class="tbtn" id="btnText" title="字幕开关">👁️<small>字幕<\/small><\/button><\/div>
+<div id="screen"><\/div>
+<script>window.UNIT = {"key": "BF2U3", "book": "Big Fun 2", "num": "U3", "name": "Unit 3 · Food", "cn": "食物", "emoji": "🍗", "accent": "#f59e0b", "file": "BF2_U3_Food.html", "sc": {"theme": "sc-dining", "face": false, "tip": "听一听，把好吃的放到餐桌上", "items": ["salad", "meat", "fish", "corn", "watermelon", "potatoes", "chicken"], "title": "", "deco": [[6, 8, 54, "🧂"], [88, 6, 54, "🪴"], [50, 78, 64, "🍽️"], [12, 78, 42, "🧃"], [82, 42, 38, "🍳"]]}, "words": [{"en": "hungry", "zh": "饿了", "icon": "😋"}, {"en": "salad", "zh": "沙拉", "icon": "🥗", "q": "What do you like?", "say": "What do you like? I like salad."}, {"en": "meat", "zh": "肉", "icon": "🍖", "q": "What do you like?", "say": "What do you like? I like meat."}, {"en": "fish", "zh": "鱼", "icon": "🐟", "q": "What do you like?", "say": "What do you like? I like fish."}, {"en": "corn", "zh": "玉米", "icon": "🌽", "q": "What do you like?", "say": "What do you like? I like corn."}, {"en": "watermelon", "zh": "西瓜", "icon": "🍉", "q": "What do you like?", "say": "What do you like? I like watermelon."}, {"en": "potatoes", "zh": "土豆", "icon": "🥔", "q": "What do you like?", "say": "What do you like? I like potatoes."}, {"en": "chicken", "zh": "鸡肉", "icon": "🍗", "q": "What do you like?", "say": "What do you like? I like chicken."}, {"en": "bread", "zh": "面包", "icon": "🍞", "q": "What do you like?", "say": "What do you like? I like bread."}, {"en": "rice", "zh": "米饭", "icon": "🍚", "q": "What do you like?", "say": "What do you like? I like rice."}, {"en": "noodles", "zh": "面条", "icon": "🍜", "q": "What do you like?", "say": "What do you like? I like noodles."}, {"en": "cake", "zh": "蛋糕", "icon": "🍰", "q": "What do you like?", "say": "What do you like? I like cake."}, {"en": "ice cream", "zh": "冰淇淋", "icon": "🍦", "q": "What do you like?", "say": "What do you like? I like ice cream."}]};
+<\/script>
+<script>/* Big Fun 合订课堂小游戏 · 引擎 */
+"use strict";
+var UNIT = window.UNIT;
+var WORDS = UNIT.words;
+var AC = UNIT.accent || '#f97316';
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.from(document.querySelectorAll(s)); };
+var screenEl = $('#screen');
+var PREFS_KEY = 'bigfun_v2_prefs';
+var prefs = { voice:true, text:true };
+try{ var _p = JSON.parse(localStorage.getItem(PREFS_KEY)||'null'); if(_p){ prefs.voice = _p.voice!==false; prefs.text = _p.text!==false; } }catch(e){}
+function savePrefs(){ try{ localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); }catch(e){} }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/<\/g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function shuffle(a){ var b=a.slice(); for(var i=b.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=b[i];b[i]=b[j];b[j]=t; } return b; }
+function pickN(list,n){ return shuffle(list).slice(0,n); }
+function byId(id){ return document.getElementById(id); }
+/* 图片 HTML */
+function pic(w, fs){ if(w.svg){ return '<span class="sv">'+w.svg+'<\/span>'; } return '<span class="ic" style="font-size:'+(fs||58)+'px">'+esc(w.icon)+'<\/span>'; }
+function lbl(w){ return prefs.text ? '<span class="en">'+esc(w.en)+'<\/span><span class="zh">'+esc(w.zh)+'<\/span>' : ''; }
+/* 语音 */
+var _speechOk=false;
+function pickVoice(){ try{ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);}); if(!vs.length) return null; return vs.find(function(v){return /en-US/i.test(v.lang)&&/(google|aria|zira|jenny|samantha|natural|siri)/i.test(v.name);})||vs[0]; }catch(e){ return null; } }
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged=function(){ _speechOk=!!pickVoice(); }; setTimeout(function(){ _speechOk=!!pickVoice(); },400); }
+function speak(txt){ if(!prefs.voice||!txt) return; try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(String(txt)); u.lang='en-US'; u.rate=0.78; u.pitch=1.05; var v=pickVoice(); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
+function stopSpeak(){ try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){} }
+function wSay(w){ return (w && w.say) ? w.say : (w ? w.en : ''); }
+/* 音效 */
+var actx=null;
+function beep(freq,t0,dur){ try{ if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)(); } var o=actx.createOscillator(),g=actx.createGain(); o.type='sine'; o.frequency.value=freq; g.gain.setValueAtTime(.0001,actx.currentTime+t0); g.gain.exponentialRampToValueAtTime(.22,actx.currentTime+t0+.02); g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t0+dur); o.connect(g); g.connect(actx.destination); o.start(actx.currentTime+t0); o.stop(actx.currentTime+t0+dur+.05); }catch(e){} }
+function sOk(){ beep(660,0,.12); beep(880,.12,.2); }
+function sNo(){ beep(210,0,.32); }
+function sTick(){ beep(520,0,.06); }
+/* 定时器管理 */
+var timers=[];
+function T(fn,ms){ var id=setTimeout(function(){ var i=timers.indexOf(id); if(i>=0) timers.splice(i,1); fn(); },ms); timers.push(id); return id; }
+function clearTimers(){ timers.forEach(function(t){ clearTimeout(t); }); timers=[]; }
+/* 弹窗反馈 */
+function toast(msg){ var t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); },1600); }
+function burst(x,y){ var f=document.createElement('div'); f.className='fx'; var es=['⭐','✨','🎉','🌟','💛']; for(var k=0;k<14;k++){ var s=document.createElement('span'); s.style.left=((x!==undefined?x:30)+Math.random()*40)+'%'; s.style.top=(y!==undefined?y:20)+'%'; s.textContent=es[k%es.length]; f.appendChild(s); } document.body.appendChild(f); setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); },1100); }
+function paint(html){ screenEl.innerHTML=html; window.scrollTo(0,0); }
+function gameShell(title, html){ paint('<div class="ghead"><span class="ht">'+esc(title)+'<\/span><\/div>'+html); }
+var curGame = null;
+function stopGame(){ clearTimers(); stopSpeak(); removeGhost(); PUZ=null; }
+/* 首页 */
+var GAME_LIST=[
+ {id:'lp',icon:'👂',name:'听音找图',desc:'听一听 · 找到对的图片'},
+ {id:'miss',icon:'🙈',name:'谁不见了',desc:'认真记 · 谁偷偷溜走啦'},
+ {id:'odd',icon:'🔍',name:'找不同',desc:'三张一样 · 找出不一样'},
+ {id:'fl',icon:'🎴',name:'翻翻乐',desc:'翻开两张 · 图片配对'},
+ {id:'wh',icon:'🔨',name:'听音打地鼠',desc:'听到什么 · 就敲哪一个'},
+ {id:'pu',icon:'🧩',name:'情景拼图',desc:'听一听 · 拖到场景里'}
+];
+function showHome(){
+  stopGame(); curGame=null;
+  var gs=GAME_LIST.map(function(g){
+    return '<button class="game-card" data-id="'+g.id+'" style="--gc:'+AC+'"><span class="gi">'+g.icon+'<\/span><span class="gn">'+g.name+'<\/span><span class="gd">'+g.desc+'<\/span><\/button>';
+  }).join('');
+  var ws=WORDS.map(function(w){ return '<span class="wchip">'+pic(w,46)+lbl(w)+'<\/span>'; }).join('');
+  paint(
+    '<div class="home-top"><div class="big">'+UNIT.emoji+'<\/div><div style="flex:1;min-width:220px"><h2>'+esc(UNIT.name)+'<\/h2><p>'+esc(UNIT.cn)+' · 全班一起玩，先点下面任一个小游戏<\/p><\/div><\/div>'
+    +'<div class="game-grid">'+gs+'<\/div>'
+    +'<div class="panel" style="margin-top:16px"><div class="ht" style="font-size:20px">📖 本单元单词<\/div><div class="word-grid">'+ws+'<\/div><\/div>');
+  $$('.game-card').forEach(function(b){ b.onclick=function(){ startGame(b.dataset.id); }; });
+}
+function startGame(id){
+  var g=GAME_LIST.find(function(x){return x.id===id;}); if(!g) return;
+  curGame=id;
+  var intro=document.createElement('div');
+  paint('<div class="panel ac" style="padding:36px 22px"><div style="font-size:88px">'+g.icon+'<\/div><h2 style="font-size:32px;margin:10px 0">'+esc(g.name)+'<\/h2><p style="color:#6b7280;font-size:18px;margin:6px 0 4px">'+esc(g.desc)+'<\/p>'
+    +'<div style="color:#9ca3af;font-size:14px;margin-bottom:18px">👂 可以随时点左上角 🏠 返回游戏列表<\/div>'
+    +'<div class="row center"><button class="btn big" id="goStart">▶ 开始游戏<\/button><\/div><\/div>');
+  byId('goStart').onclick=function(){
+    if(id==='lp'){ sListen(); }
+    else if(id==='miss'){ sMissing(); }
+    else if(id==='odd'){ sOdd(); }
+    else if(id==='fl'){ sFlip(); }
+    else if(id==='wh'){ sWhack(); }
+    else if(id==='pu'){ sPuzzle(); }
+  };
+}
+function endGame(title){
+  stopGame();
+  burst();
+  gameShell('<span class="ht">🎉<\/span>',
+    '<div class="panel end"><div class="em">🎉<\/div><h2>'+esc(title)+' 完成啦！<\/h2>'
+    +'<p class="subnote" style="font-size:18px">大家合作得真棒！点左上角 🏠 可以随时换游戏<\/p>'
+    +'<div class="endbtns"><button class="btn" id="againBtn">🔁 再玩一次<\/button><button class="btn ghost" id="homeBtn">🏠 换一个游戏<\/button><\/div><\/div>');
+  var id=curGame;
+  byId('againBtn').onclick=function(){ startGame(id); };
+  byId('homeBtn').onclick=showHome;
+}
+/* 顶栏 */
+function bindTop(){
+  byId('btnHome').onclick=function(){ showHome(); };
+  byId('btnVoice').onclick=function(){ prefs.voice=!prefs.voice; savePrefs(); byId('btnVoice').classList.toggle('on',prefs.voice); toast(prefs.voice?'🔊 朗读已开':'🔇 朗读已关'); };
+  byId('btnText').onclick=function(){ prefs.text=!prefs.text; savePrefs(); byId('btnText').classList.toggle('on',prefs.text); toast(prefs.text?'👁 显示英文':'🙈 只显示图片'); if(curGame && curGame==='pu'){ sPuzzle(); } };
+  try{ byId('btnVoice').classList.toggle('on',prefs.voice); byId('btnText').classList.toggle('on',prefs.text); }catch(e){}
+}
+/* ① 听音找图 */
+function tapGame(cfg){
+  var st={n:0,lock:false,target:null,opts:[]};
+  function ask(){
+    if(st.n>=cfg.total){ endGame(cfg.name); return; }
+    st.n++; st.lock=false;
+    var t=pickN(WORDS,1)[0];
+    var rest=shuffle(WORDS.filter(function(x){ return x.en!==t.en; })).slice(0,3);
+    st.target=t; st.opts=shuffle([t].concat(rest));
+    render();
+    if(t.auto!==false) T(function(){ if(st.lock===false && !cfg.stopped) speak(wSay(t)); },700);
+  }
+  function render(){
+    var t=st.target;
+    var qline = (t.q) ? '<div class="qline">'+esc(t.q)+'<\/div>' : '';
+    gameShell(cfg.name,
+      '<div class="panel ask"><div class="ghead"><span class="ht">'+cfg.ico+' '+cfg.name+'<\/span><span class="qbar qb2">第 '+st.n+' / '+cfg.total+' 题<\/span><\/div>'
+      +qline
+      +'<div class="ask-t">'+cfg.tip+'<\/div>'
+      +'<div class="ac" style="margin:12px 0"><button class="speak big" id="reSpeak">🔊<small>点我听<\/small><\/button><\/div>'
+      +'<div class="opt-grid">'+st.opts.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'<\/span>'+lbl(w)+'<\/button>'; }).join('')+'<\/div><\/div>');
+    byId('reSpeak').onclick=function(){ speak(wSay(t)); };
+    $$('.gcell').forEach(function(c){
+      c.onclick=function(){
+        if(st.lock) return;
+        var i=+c.dataset.i;
+        if(st.opts[i].en===t.en){
+          st.lock=true; c.classList.add('ok'); sOk(); burst(50,45);
+          speak(wSay(t));
+          T(function(){ if(!cfg.stopped) ask(); },1000);
+        }else{
+          c.classList.add('no'); sNo();
+          T(function(){ if(c.classList.contains('no')) c.classList.remove('no'); },400);
+          T(function(){ speak(wSay(t)); },650);
+        }
+      };
+    });
+  }
+  cfg.stopped=false;
+  ask();
+}
+function stopTap(cfg){ if(cfg) cfg.stopped=true; clearTimers(); }
+function sListen(){
+  var cfg={ico:'👂',name:'听音找图',tip:'听一听声音，再点出正确的图片',total:8};
+  var g={start:function(){ tapGame(cfg); },stop:function(){ stopTap(cfg); }};
+  GAME_CTX=g; g.start();
+}
+/* ② 谁不见了 */
+function sMissing(){
+  var st={n:0,total:6,set:[],gone:null,goneIdx:-1,phase:'mem'};
+  function nextRound(){
+    if(st.n>=st.total){ endGame('谁不见了'); return; }
+    st.n++;
+    st.set=pickN(WORDS,4);
+    st.goneIdx=Math.floor(Math.random()*4);
+    st.gone=st.set[st.goneIdx];
+    mem();
+  }
+  function mem(){
+    st.phase='mem';
+    gameShell('谁不见了',
+      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
+      +'<div class="ask-t">👀 快看快记，记住这 4 张图片！<\/div>'
+      +'<div class="mem4" style="margin-top:14px">'+st.set.map(function(w,i){ return '<div class="mcard" data-m="'+i+'">'+pic(w,62)+lbl(w)+'<\/div>'; }).join('')+'<\/div><\/div>');
+    T(function(){ flyAway(); },2600);
+  }
+  function flyAway(){
+    if(st.phase!=='mem') return;
+    var c=document.querySelector('.mcard[data-m="'+st.goneIdx+'"]');
+    if(c) c.classList.add('fly');
+    T(function(){ ask(); },1000);
+  }
+  function ask(){
+    st.phase='ask';
+    var cells=[0,1,2,3];
+    gameShell('谁不见了',
+      '<div class="panel ask"><div class="ghead"><span class="ht">🙈 谁不见了<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
+      +'<div class="ask-t">🤔 哪一个溜走不见了？点一点它<\/div>'
+      +'<div class="mem4" style="margin-top:14px">'+cells.map(function(i){
+         if(i===st.goneIdx){ return '<div class="mcard gone"><span class="empty-q">❓<\/span><\/div>'; }
+         return '<div class="mcard">'+pic(st.set[i],62)+lbl(st.set[i])+'<\/div>';
+        }).join('')+'<\/div>'
+      +'<div class="pieces" style="margin-top:16px">'+shuffle(st.set).map(function(w,i){ return '<button class="piece" data-i="'+i+'" data-en="'+esc(w.en)+'">'+pic(w,54)+'<\/button>'; }).join('')+'<\/div><\/div>');
+    $$('.pieces .piece').forEach(function(p){
+      p.onclick=function(){
+        if(st.phase!=='ask') return;
+        if(p.dataset.en===st.gone.en){ st.phase='done'; p.classList.add('ok'); sOk(); burst(50,50);
+          T(nextRound,900);
+        }else{ p.classList.add('shake'); sNo(); T(function(){ p.classList.remove('shake'); },400); }
+      };
+    });
+  }
+  nextRound();
+}
+/* ③ 找不同 */
+function sOdd(){
+  var st={n:0,lock:false,ans:0};
+  function ask(){
+    if(st.n>=6){ endGame('找不同'); return; }
+    st.n++; st.lock=false;
+    var a=pickN(WORDS,1)[0];
+    var rest=WORDS.filter(function(x){ return x.en!==a.en; });
+    var b=pickN(rest,1)[0];
+    var items=shuffle([a,a,a,b]);
+    st.ans=items.findIndex(function(x){ return x.en===b.en; });
+    gameShell('找不同',
+      '<div class="panel ask"><div class="ghead"><span class="ht">🔍 找不同<\/span><span class="qbar qb2">第 '+st.n+' / 6 题<\/span><\/div>'
+      +'<div class="ask-t">三张一样的图里混进了不同的一个，点出它！<\/div>'
+      +'<div class="opt-grid" style="margin-top:14px">'+items.map(function(w,i){ return '<button class="gcell" data-i="'+i+'"><span class="pic">'+pic(w,72)+'<\/span>'+lbl(w)+'<\/button>'; }).join('')+'<\/div><\/div>');
+    $$('.gcell').forEach(function(c){
+      c.onclick=function(){
+        if(st.lock) return;
+        if(+c.dataset.i===st.ans){ st.lock=true; c.classList.add('ok'); sOk(); burst(50,50); T(ask,950); }
+        else{ c.classList.add('no'); sNo(); T(function(){ c.classList.remove('no'); },400); }
+      };
+    });
+  }
+  ask();
+}
+/* ④ 翻翻乐 */
+function sFlip(){
+  var st={round:1,total:3,moves:0};
+  function board(){
+    var words=pickN(WORDS,4);
+    var deck=shuffle(words.concat(words.slice()));
+    var state=deck.map(function(w){ return {w:w,open:false,done:false}; });
+    var open1=null; var lock=false;
+    function render(){
+      gameShell('翻翻乐',
+        '<div class="panel ask"><div class="ghead"><span class="ht">🎴 翻翻乐<\/span><span class="qbar qb2">第 '+st.round+' / '+st.total+' 局<\/span><\/div>'
+        +'<div class="ask-t">📋 翻开两张一样的图片就配对成功<\/div>'
+        +'<div class="fl-grid" style="margin-top:14px">'+state.map(function(c,i){
+           var cls=c.open?'open':''; if(c.done) cls+=' done open';
+           return '<div class="flcard '+cls+'" data-i="'+i+'"><div class="in"><div class="face back">❓<\/div><div class="face front">'+pic(c.w,52)+'<span class="en">'+esc(c.w.en)+'<\/span><\/div><\/div><\/div>';
+         }).join('')+'<\/div>'
+        +'<div class="subnote" style="margin-top:12px">配对次数：'+st.moves+' 次<\/div><\/div>');
+      $$('.flcard').forEach(function(card){
+        card.onclick=function(){
+          if(lock) return;
+          var i=+card.dataset.i; var c=state[i];
+          if(c.done||c.open) return;
+          c.open=true; st.moves++; render(); openIt();
+        };
+      });
+    }
+    function openIt(){
+      var os=state.filter(function(c){return c.open&&!c.done;});
+      if(os.length<2) return;
+      lock=true;
+      if(os[0].w.en===os[1].w.en){
+        T(function(){
+          os[0].done=true; os[1].done=true; os[0].open=false; os[1].open=false;
+          sOk(); burst(40,40);
+          var left=state.filter(function(c){return !c.done;}).length;
+          if(left===0){ T(function(){ finishBoard(); },900); }
+          else{ lock=false; render(); }
+        },520);
+      }else{
+        T(function(){
+          os[0].open=false; os[1].open=false; sNo(); lock=false; render();
+        },800);
+      }
+    }
+    function finishBoard(){
+      if(st.round>=st.total){ endGame('翻翻乐'); return; }
+      st.round++;
+      paint('<div class="panel ac" style="padding:40px"><div style="font-size:80px">🎉<\/div><h2 style="font-size:30px">这一局配对成功！<\/h2><div class="row center" style="margin-top:18px"><button class="btn big" id="nb">▶ 下一局<\/button><\/div><\/div>');
+      byId('nb').onclick=board;
+    }
+    render();
+  }
+  board();
+}
+/* ⑤ 听音打地鼠 */
+function sWhack(){
+  var st={n:0,total:10,ok:0,alive:true};
+  function round(){
+    if(!st.alive) return;
+    if(st.n>=st.total){ endGame('听音打地鼠'); return; }
+    st.n++;
+    var target=pickN(WORDS,1)[0];
+    var rest=shuffle(WORDS.filter(function(x){ return x.en!==target.en; })).slice(0,2);
+    var holes=shuffle([target].concat(rest));
+    var up=[]; holes.forEach(function(h,i){ if(i<holes.length) up.push(i); });
+    gameShell('听音打地鼠',
+      '<div class="panel ask"><div class="ghead"><span class="ht">🔨 听音打地鼠<\/span><span class="qbar qb2">第 '+st.n+' / '+st.total+' 轮<\/span><\/div>'
+      +'<div class="ask-t">🔊 仔细听，然后敲中那一只！<\/div>'
+      +'<div class="ac" style="margin:10px 0"><button class="speak" id="reWh">🔊 再听一次<\/button><\/div>'
+      +'<div class="holes">'+holes.map(function(h,i){ return '<div class="hole" data-i="'+i+'"><div class="mole" data-i="'+i+'">'+pic(h,54)+'<\/div><\/div>'; }).join('')+'<\/div>'
+      +'<div class="scoreline" style="margin-top:12px">✅ 已敲对 '+st.ok+' 次<\/div><\/div>');
+    byId('reWh').onclick=function(){ speak(wSay(target)); };
+    var ended=false;
+    function finish(win){
+      if(ended) return; ended=true;
+      clearTimers();
+      if(win){ st.ok++; sOk(); burst(50,45); }
+      T(round, win?900:300);
+    }
+    $$('.mole').forEach(function(m){
+      m.onclick=function(){
+        if(ended) return;
+        var h=holes[+m.dataset.i];
+        var holeEl=m.parentNode;
+        if(h.en===target.en){ holeEl.classList.add('hitok'); finish(true); }
+        else{ holeEl.classList.add('hitno'); sNo(); T(function(){ holeEl.classList.remove('hitno'); },380); }
+      };
+    });
+    T(function(){ $$('.mole').forEach(function(m){ m.classList.add('up'); }); },450);
+    T(function(){ finish(false); },4200);
+  }
+  round();
+}
+var GAME_CTX=null;
+var _skipClick=false;
+var PUZ=null;
+function removeGhost(){ var g=document.querySelector('.dghost'); if(g&&g.parentNode) g.parentNode.removeChild(g); }
+/* ⑥ 情景拼图：face = 五官贴到人脸；zone = 听音把东西拖进场景 */
+function sPuzzle(){
+  stopGame();
+  var face = !!(UNIT.sc && UNIT.sc.face);
+  var FACE_ORDER=['eyes','ears','nose','mouth'];
+  var FACE_SLOTS={
+    eyes:[{k:'e-l',x:'18%',y:'33%',cls:'s-eye'},{k:'e-r',x:'66%',y:'33%',cls:'s-eye'}],
+    ears:[{k:'a-l',x:'0%',y:'34%',cls:'s-ear'},{k:'a-r',x:'80%',y:'34%',cls:'s-ear'}],
+    nose:[{k:'n',x:'42%',y:'48%',cls:'s-nose'}],
+    mouth:[{k:'m',x:'36%',y:'66%',cls:'s-mouth'}]
+  };
+  function wByEn(en){ return WORDS.find(function(w){ return w.en.toLowerCase()===en.toLowerCase(); }); }
+  var st={alive:true,face:face,items:[],cur:0,placed:[],done:[],sel:null};
+  if(face){
+    FACE_ORDER.forEach(function(f){ var w=wByEn(f); if(w) st.items.push(w); });
+  }else{
+    var keys=(UNIT.sc&&UNIT.sc.items)||WORDS.slice(0,6).map(function(w){return w.en;});
+    keys.forEach(function(en){ var w=wByEn(en); if(w) st.items.push(w); });
+    if(st.items.length<4){ st.items=WORDS.slice(0,6); }
+  }
+  st.items=shuffle(st.items);
+  st.done=st.items.map(function(){return false;});
+  function slotsHtml(round){
+    var w=st.items[st.cur]; var curFeat=w.en.toLowerCase();
+    var names=face?FACE_SLOTS[w.en.toLowerCase()]?[w.en.toLowerCase()]:[]:null;
+    var out='';
+    if(face){
+      Object.keys(FACE_SLOTS).forEach(function(feat){
+        var arr=FACE_SLOTS[feat];
+        arr.forEach(function(s,si){
+          var filled = (feat!=='eyes'&&feat!=='ears') ? st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})] : st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})];
+          var fillWord = st.done[st.items.findIndex(function(x){return x.en.toLowerCase()===feat;})] ? wByEn(feat) : null;
+          var hot = (feat===curFeat && !st.done[st.cur]) ? ' hot' : '';
+          var fcls = fillWord ? ' filled' : '';
+          out += '<div class="fslot '+s.cls+hot+fcls+'" data-feat="'+feat+'" style="left:'+s.x+';top:'+s.y+'">'+(fillWord?'<span class="fi">'+pic(fillWord,30)+'<\/span>':'')+'<\/div>';
+        });
+      });
+    }
+    return out;
+  }
+  function pieceIsDone(w){
+    var idx=st.items.findIndex(function(x){ return x.en===w.en; });
+    return idx>=0 && st.done[idx];
+  }
+  function render(){
+    if(!st.alive) return;
+    var w=st.items[st.cur];
+    var qline=(w && w.q)?'<div class="qline">'+esc(w.q)+'<\/div>':'';
+    var tip=(UNIT.sc&&UNIT.sc.tip)||'听一听，把它放到场景里';
+    var deco=(UNIT.sc&&UNIT.sc.deco)?UNIT.sc.deco.map(function(d){ return '<span class="deco" style="left:'+d[0]+';top:'+d[1]+';font-size:'+(d[2]||40)+'px">'+d[3]+'<\/span>'; }).join(''):'';
+    var placedHtml=st.placed.map(function(p){ return '<span class="placed" style="left:'+p.x+';top:'+p.y+'">'+pic(p.w,44)+'<\/span>'; }).join('');
+    var head='';
+    if(face){
+      head='<div class="pz-face">'
+        +'<div class="body"><\/div><div class="neck"><\/div><div class="hair"><\/div><div class="head"><\/div>'
+        +slotsHtml(st.cur)+'<\/div>';
+    }else{
+      head='<div class="pz-stage '+(UNIT.sc&&UNIT.sc.theme?UNIT.sc.theme:'')+'" id="pzStage">'+deco+placedHtml+'<\/div>';
+    }
+    var piecesHtml=st.items.map(function(wi,i){
+      var used=st.done[i];
+      return '<button class="piece'+(used?' used':'')+'" data-i="'+i+'">'+pic(wi,54)+'<\/button>';
+    }).join('');
+    gameShell('情景拼图',
+      '<div class="panel ask"><div class="ghead"><span class="ht">🧩 情景拼图<\/span><span class="qbar qb2">第 '+(st.cur+1)+' / '+st.items.length+' 题<\/span><\/div>'
+      +qline
+      +'<div class="ask-t">'+esc(tip)+'<\/div>'
+      +'<div class="ac" style="margin:10px 0"><button class="speak" id="puSpeak">🔊 再听一次<\/button><\/div>'
+      +'<div class="face-wrap">'+head+'<\/div>'
+      +'<div class="pieces">'+piecesHtml+'<\/div><\/div>');
+    byId('puSpeak').onclick=function(){ if(w) speak(wSay(w)); };
+    T(function(){ if(st.alive && w) speak(wSay(w)); },450);
+    bindPieces();
+    bindZone();
+  }
+  function bindPieces(){
+    $$('#screen .piece').forEach(function(p){
+      p.addEventListener('pointerdown',function(ev){
+        if(ev.cancelable) ev.preventDefault();
+        try{ p.setPointerCapture(ev.pointerId); }catch(e){}
+        var i=+p.dataset.i;
+        if(st.done[i]) return;
+        PUZ={i:i,px:ev.clientX,py:ev.clientY,drag:false,ghost:null,start:ev.clientX,startY:ev.clientY};
+        p.classList.add('sel');
+      });
+      p.addEventListener('pointermove',function(ev){
+        if(!PUZ||PUZ.drag) return;
+        if(Math.abs(ev.clientX-PUZ.start)>10||Math.abs(ev.clientY-PUZ.startY)>10){
+          PUZ.drag=true;
+          removeGhost();
+          var g=document.createElement('div'); g.className='dghost';
+          var w=st.items[PUZ.i];
+          g.innerHTML=pic(w,48);
+          document.body.appendChild(g); PUZ.ghost=g;
+        }
+        if(PUZ&&PUZ.ghost){ PUZ.ghost.style.left=ev.clientX+'px'; PUZ.ghost.style.top=ev.clientY+'px'; }
+      });
+      p.addEventListener('pointerup',function(ev){
+        if(!PUZ) return;
+        removeGhost();
+        var i=PUZ.i; var wasDrag=PUZ.drag;
+        var pEl=p; PUZ=null;
+        if(pEl.classList.contains('sel')) pEl.classList.remove('sel');
+        if(wasDrag){ _skipClick=true; tryPlace(i,ev.clientX,ev.clientY); }
+      });
+      p.addEventListener('click',function(ev){
+        if(_skipClick){ _skipClick=false; return; }
+        // 点击选中
+        var i=+p.dataset.i; if(st.done[i]) return;
+        var selEl=document.querySelector('.piece.sel');
+        if(selEl&&selEl!==p) selEl.classList.remove('sel');
+        p.classList.toggle('sel');
+        st.sel=(p.classList.contains('sel'))?i:null;
+      });
+    });
+  }
+  function bindZone(){
+    var stage=document.getElementById('pzStage');
+    if(stage){
+      stage.addEventListener('click',function(ev){
+        if(st.sel!==null){ tryPlace(st.sel,ev.clientX,ev.clientY); st.sel=null; }
+      });
+    }
+    if(face){
+      $$('#screen .fslot').forEach(function(s){
+        s.addEventListener('click',function(ev){
+          if(st.sel!==null){ tryPlaceSlot(st.sel,s.dataset.feat); st.sel=null; }
+        });
+      });
+    }
+  }
+  function wrongFeedback(w){
+    sNo();
+    toast('👂 先听一听，再找出 “'+esc(w.en)+'” 哦');
+    if(st.items[st.cur]) T(function(){ speak(wSay(st.items[st.cur])); },550);
+  }
+  function advance(){
+    st.cur++;
+    if(st.cur>=st.items.length){ st.alive=false; T(function(){ endGame('情景拼图'); },600); return; }
+    T(render,100);
+  }
+  function placeSuccess(w,x,y){
+    sOk(); burst(x,y);
+    speak(wSay(w));
+    var i=st.items.findIndex(function(x){return x.en===w.en;});
+    if(i>=0) st.done[i]=true;
+    st.placed.push({w:w,x:x,y:y});
+    advance();
+  }
+  function tryPlace(i,cx,cy){
+    if(!st.alive) return;
+    var w=st.items[i];
+    if(face){
+      var el=document.elementFromPoint(cx,cy);
+      if(!el) return;
+      var slot=el.closest?el.closest('.fslot'):null;
+      if(!slot){ toast('👆 拖到脸上对应的位置哦'); return; }
+      tryPlaceSlot(i,slot.dataset.feat);
+      return;
+    }
+    var stage=document.getElementById('pzStage');
+    if(!stage) return;
+    var r=stage.getBoundingClientRect();
+    if(cx<r.left||cx>r.right||cy<r.top||cy>r.bottom){
+      toast('👆 把它拖进场景里');
+      return;
+    }
+    if(w.en!==st.items[st.cur].en){ wrongFeedback(w); return; }
+    var x=Math.min(92,Math.max(7,(cx-r.left)/r.width*100)).toFixed(1);
+    var y=Math.min(90,Math.max(8,(cy-r.top)/r.height*100)).toFixed(1);
+    placeSuccess(w,x,y);
+  }
+  function tryPlaceSlot(i,feat){
+    if(!st.alive||st.done[i]) return;
+    var w=st.items[i];
+    var cur=st.items[st.cur];
+    if(w.en!==cur.en){ wrongFeedback(w); return; }
+    if(w.en.toLowerCase()===feat){
+      placeSuccess(w,'50%','30%');
+      render();
+    }else{
+      sNo();
+      toast('🤔 这个位置不是放它的地方哦');
+      T(function(){ if(st.alive) speak(wSay(cur)); },550);
+    }
+  }
+  render();
+}
+/* 引导页入口+启动 */
+window.addEventListener('load',function(){
+  bindTop();
+  showHome();
+});
+
+<\/script>
+<\/body>
+<\/html>
